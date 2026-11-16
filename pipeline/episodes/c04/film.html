@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"></head>
+<body><div id="stage"></div>
+<script src="file:///home/claude/prod/lib/engine.js"></script>
+<script src="timing.js"></script>
+<script>
+// Carnet n°4 — « Pourquoi un mensonge sur l'âge peut-il finir par détruire une relation ? »
+// Fil rouge : la pièce d'identité et ses « cinq ans » retirés, en ocre ; puis les dominos.
+const Q=r=>s=>r.querySelector(s);
+const G='color:var(--second)';
+const idcard=(cls,x,y,s,night)=>'<g class="'+cls+'" transform="translate('+x+' '+y+') scale('+s+')"><rect x="-200" y="-125" width="400" height="250" rx="18" style="fill:'+(night?'var(--nightlift)':'var(--paper2)')+'"/><rect x="-200" y="-125" width="400" height="250" rx="18" class="ink"/>'+
+  '<rect x="-170" y="-90" width="120" height="150" rx="8" style="fill:var(--wash2)"/><circle cx="-110" cy="-40" r="30" style="fill:var(--wash)"/><path d="M-160 50 Q-110 0 -60 50" style="fill:var(--wash)"/>'+
+  '<path d="M-20 -70 H160 M-20 -30 H120" style="stroke:var(--second);stroke-width:5;stroke-linecap:round;opacity:.5"/>'+TXT('',20,40,26,'âge','var(--second)','start')+TXT(cls+'-age',20,90,56,'70','var(--main)','start','Fraunces,Georgia,serif')+'</g>';
+
+// 01 — Accroche, nuit : six ans de voyages… et un mensonge.
+sc('accroche',['01'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam ac-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="ac-boil">'+W.moon('ac-moon',1760,180,48)+'<path class="pencil" d="M1000 930 Q1400 918 1880 930"/>'+
+    W.suitcase('ac-s',1250,920,1.2)+idcard('ac-id',1560,520,.85,true)+'</g></svg>'+'<p class="note ac-n" style="left:1600px;top:330px;font-size:84px;color:var(--accent)">− 5 ans</p></div>'+pool(1100,180,700,760,'ac-pool')+
+    '<div class="words on-night" style="left:160px;top:260px;width:860px"><p class="sub ac-sub">Six ans de vie commune. Six ans de voyages, d’hôtels, d’aéroports.</p><h1 class="line ac-line" style="font-size:66px">Et un jour, elle découvre que depuis le premier rendez-vous… il lui ment.</h1></div></div>';
+  const q=Q(r);this.cam=q('.ac-cam');this.boil=q('.ac-boil');this.s=q('.ac-s');this.card=q('.ac-id');this.moon=q('.ac-moon');this.n=q('.ac-n');this.sub=q('.ac-sub');this.line=split(q('.ac-line'));this.pool=q('.ac-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.05,1400,600);W.boil(this.boil,t);show(this.moon,t,.4,1.2);show(this.s,t,P(1),.5);show(this.card,t,P(1)+1,.5);fade(this.n,t,P(3),.5,0);
+  fade(this.sub,t,P(0),.7);wordsIn(this.line,t,P(2),.09);this.pool.style.opacity=(.3+.05*Math.sin(t*1.2))*eo(seg(t,.4,1.6))},{night:true});
+
+// 02 — Titre : la pièce d'identité.
+sc('titre',['02'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ti-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ti')+'<g class="ti-boil">'+idcard('ti-id',1440,520,1.2)+'<path class="ti-x" d="M1470 615 L1580 550" style="stroke:var(--accent);stroke-width:7;stroke-linecap:round"/></g></svg></div>'+
+    pool(900,100,1100,900,'ti-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:280px;width:760px"><p class="hand ti-num">Carnet n°4</p><h1 class="line ti-line" style="font-size:68px">Pourquoi un mensonge sur l’âge peut-il finir par détruire une relation ?</h1></div></div>';
+  const q=Q(r);this.cam=q('.ti-cam');this.boil=q('.ti-boil');this.card=q('.ti-id');this.x=q('.ti-x');this.num=q('.ti-num');this.line=split(q('.ti-line'));this.pool=q('.ti-pool');
+},function(t){push(this.cam,t,this.dur,1,1.035,1440,520);W.boil(this.boil,t);show(this.card,t,.1,.6);show(this.x,t,this.dur-2.5,.4);fade(this.num,t,this.P(0),.5);wordsIn(this.line,t,this.P(0)+1,.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 03 — Six ans de vie partagée ; un âge annoncé dès la rencontre.
+sc('histoire',['03'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam hi-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('hi')+'<g class="hi-boil">'+W.ground(930,980,1800,0)+W.woman('hi-w',1200,926,1.02,false)+W.figure('hi-m',1360,926,1.05,true)+
+    W.calendar('hi-c',1650,470,.8,'6','ans','ensemble')+W.bub('hi-b',1320,200,260,90,true)+'</g></svg>'+'<p class="note hi-bt" style="left:1350px;top:212px;font-size:46px;color:var(--main)">« J’ai 70 ans. »</p></div>'+
+    pool(800,0,1100,1000,'hi-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="sub hi-sub">Une dame de soixante-quinze ans m’a raconté une histoire assez étonnante.</p><h2 class="line hi-line" style="font-size:60px">Dès leur rencontre, il lui avait annoncé son âge.</h2></div></div>';
+  const q=Q(r);this.cam=q('.hi-cam');this.st=W.prep(r);this.boil=q('.hi-boil');this.w=q('.hi-w');this.m=q('.hi-m');this.c=q('.hi-c');this.b=q('.hi-b');this.bt=q('.hi-bt');this.sub=q('.hi-sub');this.line=split(q('.hi-line'));this.pool=q('.hi-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.w,t,.2,.7);show(this.m,t,P(2),.7);show(this.c,t,P(2)+.6,.5);const b=eo(seg(t,P(3)+.6,P(3)+1.1));this.b.style.opacity=b;this.bt.style.opacity=b;
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(3),.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 04 — Sauf que ce n'était pas le vrai : cinq ans de moins.
+sc('cinq',['04'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ci-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ci')+'<g class="ci-boil">'+idcard('ci-id',1420,500,1.25)+'</g></svg>'+
+    '<p class="ci-true" style="position:absolute;margin:0;left:1330px;top:700px;font-family:Fraunces,Georgia,serif;font-weight:500;font-size:70px;color:var(--accent)">75</p>'+note('ci-n',1440,712,'− 5 ans',';color:var(--accent);font-size:62px')+'</div>'+
+    pool(800,0,1100,1000,'ci-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><h2 class="line ci-line" style="font-size:66px">Sauf que ce n’était pas le vrai.</h2><p class="hand ci-hand" style="color:var(--second)">Cinq ans… sur le papier, presque rien.</p></div></div>';
+  const q=Q(r);this.cam=q('.ci-cam');this.boil=q('.ci-boil');this.card=q('.ci-id');this.tr=q('.ci-true');this.n=q('.ci-n');this.line=split(q('.ci-line'));this.hand=q('.ci-hand');this.pool=q('.ci-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1440,560);W.boil(this.boil,t);show(this.card,t,.1,.6);fade(this.tr,t,P(1),.5,0);fade(this.n,t,P(1)+.6,.5,0);
+  wordsIn(this.line,t,P(0),.1);fade(this.hand,t,P(2),.6);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 05 — Un mensonge à entretenir : l'hôtel, l'aéroport.
+sc('entretenir',['05'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam en-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('en')+'<g class="en-boil">'+
+    '<g class="en-hotel"><rect x="1000" y="480" width="360" height="40" rx="6" style="fill:var(--wash2)"/><path class="ink" d="M990 480 H1370 M1020 520 V760 M1340 520 V760"/>'+TXT('',1180,430,34,'HÔTEL','var(--main)','middle','Fraunces,Georgia,serif')+'<rect x="1210" y="452" width="90" height="26" rx="4" style="fill:var(--accent)"/></g>'+
+    '<g class="en-air"><path class="ink-thin" d="M1490 380 L1650 340 L1690 300 L1706 312 L1686 352 L1790 380 L1778 398 L1680 390 L1640 446 L1622 440 L1630 386 L1500 400 Z" style="fill:var(--paper2)"/>'+TXT('',1650,520,30,'embarquement','var(--second)')+
+    '<rect x="1530" y="560" width="240" height="200" rx="10" style="fill:var(--paper2)"/><rect class="ink-thin" x="1530" y="560" width="240" height="200" rx="10"/><path class="pencil" d="M1560 610 H1740 M1560 650 H1700 M1560 690 H1720"/></g>'+
+    '<g class="en-shield" transform="translate(0 -130)"><path d="M1400 800 L1480 830 V900 Q1480 960 1400 990 Q1320 960 1320 900 V830 Z" style="fill:var(--accent)"/><path d="M1370 900 L1395 925 L1435 870" style="fill:none;stroke:var(--ground);stroke-width:8;stroke-linecap:round"/></g></g></svg>'+
+    note('en-n',1500,740,'à protéger, en permanence',';color:var(--accent);font-size:44px')+'</div>'+
+    pool(800,0,1100,1000,'en-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub en-sub">Un mensonge dit au début d’une histoire, il faut ensuite l’entretenir.</p><h2 class="line en-line" style="font-size:60px">Tous les jours.</h2></div></div>';
+  const q=Q(r);this.cam=q('.en-cam');this.boil=q('.en-boil');this.h=q('.en-hotel');this.a=q('.en-air');this.sh=q('.en-shield');this.n=q('.en-n');this.sub=q('.en-sub');this.line=split(q('.en-line'));this.pool=q('.en-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,560);W.boil(this.boil,t);show(this.h,t,P(2),.5);show(this.a,t,P(3),.5);show(this.sh,t,P(4)+.6,.5);fade(this.n,t,P(4)+1,.5,0);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.12);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 06 — La vérité découverte.
+sc('verite',['06'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ve-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ve')+'<g class="ve-boil">'+W.ground(930,980,1800,0)+W.woman('ve-w',1200,926,1.05,false)+idcard('ve-id',1580,560,.8)+'</g></svg>'+
+    '<p class="ve-75" style="position:absolute;margin:0;left:1770px;top:560px;font-family:Fraunces,Georgia,serif;font-weight:500;font-size:60px;color:var(--accent)">75</p></div>'+
+    pool(800,0,1100,1000,'ve-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:270px;width:600px"><p class="sub ve-sub">Après six ans, elle a découvert la vérité.</p><h2 class="line ve-line" style="font-size:60px">Une seule question lui est venue.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ve-cam');this.st=W.prep(r);this.boil=q('.ve-boil');this.w=q('.ve-w');this.card=q('.ve-id');this.n=q('.ve-75');this.sub=q('.ve-sub');this.line=split(q('.ve-line'));this.pool=q('.ve-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.05,1400,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.w,t,.1,.6);show(this.card,t,.4,.6);fade(this.n,t,P(0)+1,.5,0);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 07 — La bascule, nuit : « Sur quoi d'autre m'as-tu menti ? »
+sc('question',['07'],function(r){
+  const qs=[[1180,250,90],[1560,210,70],[1700,480,110],[1120,560,70],[1450,700,90],[1760,780,60],[1260,880,60]];
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam qu-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="qu-boil">'+idcard('qu-id',1440,520,1.1,true)+
+    '<path class="qu-crack" d="M1300 400 L1380 480 L1350 540 L1450 600 L1420 660" style="fill:none;stroke:var(--accent);stroke-width:5;stroke-linejoin:round"/></g></svg>'+
+    qs.map((p,i)=>'<p class="note qu-q'+i+'" style="left:'+p[0]+'px;top:'+p[1]+'px;font-size:'+p[2]+'px;color:'+(i%2?'var(--ground)':'var(--accent)')+';opacity:0">?</p>').join('')+'</div>'+pool(1150,200,600,700,'qu-pool')+
+    '<div class="words on-night" style="left:160px;top:260px;width:820px"><p class="sub qu-sub">« Si tu m’as menti sur ton âge pendant six ans…</p><h2 class="line qu-line" style="font-size:78px">sur quoi d’autre m’as-tu menti ? »</h2></div></div>';
+  const q=Q(r);this.cam=q('.qu-cam');this.boil=q('.qu-boil');this.card=q('.qu-id');this.cr=q('.qu-crack');this.q=qs.map((_,i)=>q('.qu-q'+i));this.sub=q('.qu-sub');this.line=split(q('.qu-line'));this.pool=q('.qu-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.06,1440,520);W.boil(this.boil,t);show(this.card,t,.1,.8);show(this.cr,t,P(1),.4);this.q.forEach((x,i)=>fade(x,t,P(1)+.3+i*.25,.4,0));
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.12);this.pool.style.opacity=(.2+.45*eo(seg(t,P(1),P(1)+1)))*(.92+.08*Math.sin(t*1.3))},{night:true,lead:1.5});
+
+// 08 — Les dominos : le premier mensonge en protégeait d'autres.
+sc('dominos',['08'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam do-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('do')+'<g class="do-boil">'+W.ground(800,980,1820,0)+
+    [0,1,2,3,4,5].map(i=>'<g class="do-d'+i+'"><rect x="-22" y="-200" width="44" height="200" rx="6" style="fill:'+(i===0?'var(--accent)':'var(--paper2)')+';stroke:var(--main);stroke-width:3"/></g>').join('')+'</g></svg>'+
+    note('do-n',1050,560,'le premier',';color:var(--accent);font-size:46px')+'</div>'+pool(800,0,1100,1000,'do-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:270px;width:600px"><p class="sub do-sub">D’autres mensonges sont apparus, peu à peu.</p><h2 class="line do-line" style="font-size:62px">Le premier en avait protégé d’autres.</h2></div></div>';
+  const q=Q(r);this.cam=q('.do-cam');this.st=W.prep(r);this.boil=q('.do-boil');this.d=[0,1,2,3,4,5].map(i=>q('.do-d'+i));this.n=q('.do-n');this.sub=q('.do-sub');this.line=split(q('.do-line'));this.pool=q('.do-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,620);W.draw(this.st,t);W.boil(this.boil,t);
+  this.d.forEach((d,i)=>{const a=lerp(0,62,eio(seg(t,P(1)+.3+i*.35,P(1)+.75+i*.35)));d.setAttribute('transform','translate('+(1100+i*120)+' 800) rotate('+a.toFixed(1)+')');d.style.opacity=eo(seg(t,.2+i*.1,.6+i*.1))});
+  fade(this.n,t,P(0)+.6,.5,0);fade(this.sub,t,P(1),.6);wordsIn(this.line,t,P(2),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 09 — Décodage (sauge) : elle aurait eu le choix.
+sc('choix',['09'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ch-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ch')+'<g class="ch-boil">'+W.ground(930,980,1820,0)+W.woman('ch-w',1180,926,1,false)+
+    '<path class="ink" d="M1500 930 V380"/><path d="M1500 420 H1720 L1760 460 L1720 500 H1500 Z" style="fill:var(--paper2);stroke:var(--sage);stroke-width:4"/><path d="M1500 560 H1300 L1260 600 L1300 640 H1500 Z" style="fill:var(--paper2);stroke:var(--sage);stroke-width:4"/>'+
+    TXT('',1610,472,30,'oui','var(--sage)')+TXT('',1390,612,30,'non','var(--sage)')+'</g></svg>'+note('ch-n',1420,260,'avec la vraie information',';color:var(--sage);font-size:46px')+'</div>'+
+    pool(800,0,1100,1000,'ch-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub ch-sub">Cinq ans ne l’auraient peut-être pas arrêtée.</p><h2 class="line ch-line" style="font-size:64px;color:var(--sage)">Mais elle aurait eu le choix.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ch-cam');this.st=W.prep(r);this.boil=q('.ch-boil');this.w=q('.ch-w');this.n=q('.ch-n');this.sub=q('.ch-sub');this.line=split(q('.ch-line'));this.pool=q('.ch-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.boil,t,.1,.6);fade(this.n,t,P(3),.5,0);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(2),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 10 — L'aveu qui grossit avec le temps.
+sc('aveu',['10'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam av-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('av')+'<g class="av-boil">'+
+    '<rect class="av-s1" x="930" y="380" width="440" height="90" rx="10" style="fill:var(--paper2);stroke:var(--main);stroke-width:3"/>'+TXT('av-t1',1150,435,25,'« Je t’ai menti sur mon âge. »','var(--main)')+
+    '<g class="av-s2"><rect x="1400" y="220" width="360" height="620" rx="10" style="fill:var(--paper2);stroke:var(--main);stroke-width:3"/>'+[0,1,2,3,4,5,6,7,8,9,10,11].map(i=>'<path class="pencil" d="M1430 '+(270+i*46)+' H'+(1720-(i%3)*40)+'"/>').join('')+'</g>'+
+    TXT('av-a',1150,520,30,'au début','var(--second)')+TXT('av-b',1580,890,30,'des années plus tard','var(--second)')+'</g></svg></div>'+
+    pool(800,0,1100,1000,'av-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub av-sub">Au début, un aveu tient en une phrase.</p><h2 class="line av-line" style="font-size:60px">Plus le temps passe, plus la vérité coûte cher.</h2></div></div>';
+  const q=Q(r);this.cam=q('.av-cam');this.boil=q('.av-boil');this.s1=q('.av-s1');this.t1=q('.av-t1');this.s2=q('.av-s2');this.a=q('.av-a');this.b=q('.av-b');this.sub=q('.av-sub');this.line=split(q('.av-line'));this.pool=q('.av-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,520);W.boil(this.boil,t);show(this.s1,t,P(0)+.3,.5);show(this.t1,t,P(0)+.5,.5);show(this.a,t,P(0)+.8,.5);
+  const g=eo(seg(t,P(1),P(2)+1.5));this.s2.style.opacity=g>0?1:0;this.s2.setAttribute('transform','translate(0 '+((1-g)*620*0).toFixed(0)+')');this.s2.style.clipPath='inset(0 0 '+((1-g)*100).toFixed(1)+'% 0)';show(this.b,t,P(2)+1,.5);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(3),.09);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 11 — Après cinquante ans, chacun arrive avec son histoire.
+sc('bagages',['11'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ba-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ba')+'<g class="ba-boil">'+W.ground(930,980,1820,0)+W.figure('ba-m',1200,926,1,false)+W.woman('ba-w',1620,926,1,true)+
+    W.suitcase('ba-s1',1310,926,.55)+W.suitcase('ba-s2',1500,926,.6)+W.heart('ba-h',1410,500,.9)+'</g></svg>'+note('ba-n',1080,260,'un divorce, des enfants, des réussites, des blessures',G+';font-size:40px;width:700px')+'</div>'+
+    pool(800,0,1100,1000,'ba-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><h2 class="line ba-line" style="font-size:60px">Personne n’a besoin d’une vie parfaite pour être aimé.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ba-cam');this.st=W.prep(r);this.boil=q('.ba-boil');this.m=q('.ba-m');this.w=q('.ba-w');this.s1=q('.ba-s1');this.s2=q('.ba-s2');this.h=q('.ba-h');this.n=q('.ba-n');this.line=split(q('.ba-line'));this.pool=q('.ba-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,620);W.draw(this.st,t);W.boil(this.boil,t);show(this.m,t,.2,.7);show(this.w,t,.4,.7);show(this.s1,t,P(0)+1,.5);show(this.s2,t,P(0)+1.5,.5);fade(this.n,t,P(0)+1.8,.5,0);show(this.h,t,P(1)+.6,.5);
+  wordsIn(this.line,t,P(1),.09);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 12 — La fin : montrer le meilleur de soi, pas modifier la réalité. Entrelien.
+sc('fin',['12'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam fi-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('fi')+'<g class="fi-boil">'+W.ground(900,1200,1800,0)+W.woman('fi-w',1500,896,.95,false)+'</g></svg></div>'+
+    pool(1000,150,800,700,'fi-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:200px;width:820px"><p class="hand fi-a">Modifier la réalité, c’est retirer à l’autre le droit de choisir.</p><h2 class="line fi-line" style="font-size:58px">Ce ne sont pas les cinq ans qui font mal. C’est tout ce qu’on se met à douter, après.</h2></div>'+
+    '<div class="words" style="left:260px;bottom:140px;width:900px;gap:8px"><p class="line fi-name" style="font-size:124px;font-weight:500">Entrelien</p><p class="sub fi-tag">Les Carnets de l’Entremetteur</p></div></div>';
+  const q=Q(r);this.cam=q('.fi-cam');this.st=W.prep(r);this.boil=q('.fi-boil');this.w=q('.fi-w');this.a=q('.fi-a');this.line=split(q('.fi-line'));this.name=q('.fi-name');this.tag=q('.fi-tag');this.pool=q('.fi-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1.03,1,1480,560);W.draw(this.st,t);W.boil(this.boil,t);show(this.w,t,.2,.8);
+  fade(this.a,t,P(1),.6);wordsIn(this.line,t,P(2),.07);fade(this.name,t,P(4)+.2,.8,20);fade(this.tag,t,P(4)+.7,.6);this.pool.style.opacity=.75+.1*Math.sin(t)});
+
+startFilm();
+</script></body></html>

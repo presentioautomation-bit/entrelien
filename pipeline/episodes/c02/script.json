@@ -1,0 +1,22 @@
+{
+  "numero": "2",
+  "titre": "Pourquoi nous sommes plus exigeants avec les autres qu'avec nous-mêmes",
+  "source": "https://entrelien.fr/carnets/plus-exigeants-avec-les-autres-quavec-nous-memes",
+  "mood": "tender",
+  "hush": ["04"],
+  "gaps": {"01": 0.6, "04": 1.6},
+  "blocks": {
+    "01": "Une personne m'a dit un jour : « Je ne veux pas rencontrer quelqu'un qui a divorcé deux fois. » Elle était parfaitement sérieuse. Et il y avait un détail qu'elle avait oublié.",
+    "02": "Carnet numéro deux. Pourquoi nous sommes plus exigeants avec les autres qu'avec nous-mêmes.",
+    "03": "Elle ne mentait pas. Elle ne se moquait pas de moi. Elle m'expliquait simplement ce qu'elle ne voulait plus vivre. Et puis, un peu plus tard dans la conversation, elle m'a parlé de son propre parcours.",
+    "04": "Elle avait divorcé… deux fois.",
+    "05": "Dans son cas, il y avait des raisons. Dans celui de l'autre, il y avait un motif d'inquiétude. Ce n'est pas de la mauvaise foi. C'est un mécanisme très humain, que les psychologues étudient depuis longtemps.",
+    "06": "On explique ses propres comportements par les circonstances… et ceux des autres par leur caractère. Je suis en retard parce que le train était bloqué. Il est en retard parce qu'il est négligent.",
+    "07": "Sur notre propre histoire, nous avons le dossier complet : le contexte, les circonstances, les années de patience avant la rupture. Sur l'autre, nous n'avons qu'une ligne dans un profil. Ce n'est pas deux personnes qu'on compare. C'est une biographie… contre une étiquette. Et l'étiquette perd toujours.",
+    "08": "Les applications n'ont pas inventé ce mécanisme. Elles l'ont industrialisé. En transformant nos préférences en filtres, l'âge, la taille, la distance, la situation, elles changent une envie floue en règle. Et une règle, on la défend.",
+    "09": "Je propose parfois un petit exercice. Écrire ses critères… puis se demander lesquels on remplirait soi-même. Le résultat est presque toujours embarrassant. Et souvent salutaire.",
+    "10": "Car l'exigence excessive est aussi une protection. Après une séparation douloureuse, des critères impossibles garantissent une chose : on ne sera pas déçu… puisqu'on ne s'engagera pas. Ce n'est pas de l'arrogance. C'est un pare-feu.",
+    "11": "Les personnes les plus indulgentes ne sont pas celles qui ont le moins souffert. Ce sont celles qui ont compris qu'elles aussi, un jour, avaient été un mauvais profil sur le papier.",
+    "12": "Avant d'écarter quelqu'un, il y a une seule question à se poser. Est-ce que je refuse cette personne… ou est-ce que je refuse le peu que je sais d'elle ? C'était un Carnet de l'Entremetteur."
+  }
+}

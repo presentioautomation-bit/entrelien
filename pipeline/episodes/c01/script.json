@@ -1,0 +1,22 @@
+{
+  "numero": "1",
+  "titre": "Pourquoi les brouteurs exploitent davantage notre ego que notre naïveté",
+  "source": "https://entrelien.fr/carnets/les-brouteurs-exploitent-notre-ego",
+  "mood": "blue",
+  "hush": ["06"],
+  "gaps": {"01": 0.6, "06": 1.6},
+  "blocks": {
+    "01": "Quand une personne me raconte l'arnaque dont elle sort, elle ne me dit presque jamais : « J'ai été crédule. » Elle me dit autre chose. Et c'est beaucoup plus inquiétant.",
+    "02": "Carnet numéro un. Pourquoi les brouteurs exploitent davantage notre ego que notre naïveté.",
+    "03": "On imagine la victime idéale : isolée, mal informée, incapable de repérer un faux profil. C'est une image confortable. Elle nous met à l'abri. Mais elle est largement fausse.",
+    "04": "Parmi les personnes que j'ai accompagnées après une arnaque, il y avait des cadres, des enseignants, un informaticien. Des gens qui savaient parfaitement qu'un inconnu qui demande de l'argent, c'est un signal d'alarme. Ils le savaient. Ça n'a rien empêché.",
+    "05": "Ce que le brouteur vend, ce n'est pas une histoire d'amour. C'est une attention totale. Il écrit le matin, il écrit le soir. Il se souvient du nom du chien. Il demande comment s'est passé le rendez-vous chez le médecin. Une dame m'a résumé tout cela en une phrase.",
+    "06": "« Il ne m'a pas fait croire qu'il m'aimait. Il m'a fait croire que j'étais quelqu'un dont on peut tomber amoureux. »",
+    "07": "Beaucoup d'adultes de cinquante, soixante ans vivent depuis longtemps dans une forme de pénurie. On ne les remercie plus. On ne les regarde plus. On les suppose solides. Le brouteur arrive… et il déverse un surplus. Le contraste fait le reste.",
+    "08": "Une arnaque à la peur, celle de la fausse banque, dure une heure. Une arnaque à l'ego peut durer quatorze mois. Car la peur réveille la vigilance. La valorisation, elle, la désarme : douter du récit, ce serait douter de sa propre valeur.",
+    "09": "C'est pour cela que les proches qui alertent obtiennent souvent l'effet inverse. Sans le vouloir, ils demandent à la personne de renoncer à l'image d'elle-même qu'on vient de lui offrir.",
+    "10": "Et le scénario revient souvent. D'abord, la présence : aucune demande, rien de suspect. Puis le secret : « personne ne comprendrait ». Les amis, les enfants, le banquier sont tenus à l'écart. Enfin, l'épreuve : l'argent n'est pas demandé. C'est la victime qui le propose… pour prouver quelque chose.",
+    "11": "Dire « méfiez-vous des faux profils » ne suffit pas : personne ne se croit assez naïf pour tomber dans le piège. Il faudrait plutôt dire ceci : manquer de reconnaissance nous rend vulnérables. Et cela n'a rien de honteux.",
+    "12": "La meilleure prévention n'est peut-être pas une affiche. Elle demande simplement que l'on continue de regarder les gens. C'était un Carnet de l'Entremetteur."
+  }
+}

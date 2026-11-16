@@ -1,0 +1,22 @@
+{
+  "numero": "4",
+  "titre": "Pourquoi un mensonge sur l'âge peut-il finir par détruire une relation ?",
+  "source": "https://entrelien.fr/carnets/pourquoi-un-mensonge-sur-l-age-peut-il-finir-par-detruire-une-relation",
+  "mood": "blue",
+  "hush": ["07"],
+  "gaps": {"01": 0.6, "07": 1.6},
+  "blocks": {
+    "01": "Six ans de vie commune. Six ans de voyages, d'hôtels, d'aéroports. Et un jour, elle découvre que depuis le premier rendez-vous… il lui ment.",
+    "02": "Carnet numéro quatre. Pourquoi un mensonge sur l'âge peut-il finir par détruire une relation ?",
+    "03": "J'ai discuté avec une dame de soixante-quinze ans. Elle m'a raconté une histoire assez étonnante. Pendant six ans, elle avait partagé sa vie avec un homme. Dès leur rencontre, il lui avait annoncé son âge.",
+    "04": "Sauf que ce n'était pas le vrai. Il s'était retiré cinq ans. Cinq ans… Sur le papier, presque rien.",
+    "05": "Mais un mensonge dit au début d'une histoire, il faut ensuite l'entretenir. Tous les jours. À l'hôtel, quand on présente ses papiers. À l'aéroport, au moment de l'embarquement. Le mensonge n'était plus une phrase : c'était quelque chose qu'il fallait protéger, en permanence.",
+    "06": "Et puis, après six ans, elle a découvert la vérité. Et à ce moment-là, une seule question lui est venue.",
+    "07": "« Si tu m'as menti sur ton âge pendant six ans… sur quoi d'autre m'as-tu menti ? »",
+    "08": "Dans son histoire, la question n'est pas restée théorique. D'autres mensonges sont apparus, peu à peu. Le premier en avait protégé d'autres.",
+    "09": "Le plus troublant, c'est que cinq ans ne l'auraient peut-être pas arrêtée. Elle aurait pu se dire que ça n'avait aucune importance. Mais elle aurait eu le choix. Avec la vraie information.",
+    "10": "Au début, un aveu tient en une phrase : « Je t'ai menti sur mon âge. » Des années plus tard, il faut aussi expliquer pourquoi on a menti, pourquoi on a continué… et pourquoi on n'a jamais rien dit. Plus le temps passe, plus la vérité coûte cher.",
+    "11": "Après cinquante ans, chacun arrive avec son histoire : un divorce, des enfants, des réussites, des blessures. Personne n'a besoin d'une vie parfaite pour être aimé. Et personne ne devrait avoir besoin d'une version améliorée de lui-même pour être choisi.",
+    "12": "Montrer le meilleur de soi, c'est permettre à l'autre de nous découvrir. Modifier la réalité, c'est lui retirer le droit de choisir. Et parfois, ce ne sont pas les cinq ans cachés qui font le plus mal… C'est tout ce qu'on se met à douter, après. C'était un Carnet de l'Entremetteur."
+  }
+}

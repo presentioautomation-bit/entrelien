@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"></head>
+<body><div id="stage"></div>
+<script src="file:///home/claude/prod/lib/engine.js"></script>
+<script src="timing.js"></script>
+<script>
+// Carnet n°9 — « Il avait tout réussi… sauf sa vie à deux »
+// Fil rouge : Venise (le pont, l'eau) et la place vide à côté de lui, qui finit par être occupée. Ocre : « 25 ans de moins », puis le cœur.
+const Q=r=>s=>r.querySelector(s);
+const HANDG='color:var(--second)';
+const venice=(cls,y)=>'<g class="'+cls+'"><path class="ink" d="M980 '+y+' Q1300 '+(y-220)+' 1620 '+y+'"/><path class="ink-thin" d="M1010 '+(y-12)+' Q1300 '+(y-200)+' 1590 '+(y-12)+'"/>'+
+  [1060,1130,1200,1270,1340,1410,1480,1550].map((x,i)=>{const h=y-12-Math.sin(Math.PI*(x-1010)/580)*186;return '<path class="pencil" d="M'+x+' '+h.toFixed(0)+' V'+(h-26).toFixed(0)+'"/>'}).join('')+
+  '<path class="pencil" d="M880 '+(y+40)+' Q1000 '+(y+30)+' 1100 '+(y+40)+' M1180 '+(y+70)+' Q1320 '+(y+60)+' 1460 '+(y+70)+' M1520 '+(y+44)+' Q1640 '+(y+36)+' 1760 '+(y+44)+'"/></g>';
+const gondola=(cls,x,y)=>'<g class="'+cls+'" transform="translate('+x+' '+y+')"><path d="M-210 0 Q0 40 210 0 Q240 -20 250 -70 Q200 -10 0 -10 Q-200 -10 -240 -50 Q-236 -14 -210 0 Z" style="fill:var(--main)"/><path class="ink-thin" d="M150 -10 L190 -200"/></g>';
+
+// 01 — Accroche, nuit : il est seul ; la chute posée d'entrée.
+sc('accroche',['01'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam ac-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="ac-boil">'+W.moon('ac-moon',1720,200,56)+
+    '<path class="pencil" d="M980 900 Q1400 888 1880 900"/>'+W.figure('ac-m',1250,896,1.12,false,'var(--nightlift)')+
+    '<g class="ac-seat"><rect x="1430" y="740" width="140" height="18" rx="4" style="fill:none;stroke:var(--ground);stroke-width:3;stroke-dasharray:10 10;opacity:.6"/><path d="M1440 758 V896 M1560 758 V896 M1440 740 V640" style="fill:none;stroke:var(--ground);stroke-width:3;stroke-dasharray:10 10;opacity:.6"/></g>'+
+    '</g></svg><p class="note ac-age" style="left:1420px;top:560px;font-size:84px;color:var(--accent)">− 25 ans</p></div>'+pool(1050,180,700,760,'ac-pool')+
+    '<div class="words on-night" style="left:160px;top:200px;width:880px"><p class="sub ac-q">« J’ai très bien réussi ma vie professionnelle. Mais finalement, je suis seul… »</p><h1 class="line ac-l1" style="font-size:66px">Il voulait une femme de son âge.</h1><h1 class="line ac-l2" style="font-size:66px">Je lui en ai présenté une… de <span class="mark">25 ans de moins</span>.</h1></div></div>';
+  const q=Q(r);this.cam=q('.ac-cam');this.boil=q('.ac-boil');this.m=q('.ac-m');this.moon=q('.ac-moon');this.seat=q('.ac-seat');this.age=q('.ac-age');this.q=q('.ac-q');this.l1=split(q('.ac-l1'));this.l2=q('.ac-l2');this.pool=q('.ac-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.05,1300,600);W.boil(this.boil,t);show(this.m,t,.1,.9);show(this.moon,t,.5,1.2);show(this.seat,t,P(1),1);
+  fade(this.q,t,P(0),.8);wordsIn(this.l1,t,P(2),.1);fade(this.l2,t,P(3),.6);fade(this.age,t,P(4),.5,0);this.pool.style.opacity=(.3+.05*Math.sin(t*1.2))*eo(seg(t,.4,1.6))},{night:true});
+
+// 02 — Titre : une valise couverte d'étiquettes de voyage.
+sc('titre',['02'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ti-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ti')+'<g class="ti-boil">'+W.suitcase('ti-s',1420,700,2.1)+
+    '<g class="ti-tags"><rect x="1250" y="440" width="110" height="64" rx="8" transform="rotate(-8 1305 472)" style="fill:var(--paper2);stroke:var(--main);stroke-width:3"/><rect x="1480" y="520" width="120" height="70" rx="8" transform="rotate(6 1540 555)" style="fill:var(--paper2);stroke:var(--accent);stroke-width:3"/><circle cx="1380" cy="600" r="34" style="fill:var(--paper2);stroke:var(--main);stroke-width:3"/></g></g></svg></div>'+
+    pool(900,100,1100,900,'ti-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:320px;width:780px"><p class="hand ti-num">Carnet n°9</p><h1 class="line ti-line" style="font-size:78px">Il avait tout réussi… sauf sa vie à deux</h1></div></div>';
+  const q=Q(r);this.cam=q('.ti-cam');this.boil=q('.ti-boil');this.s=q('.ti-s');this.tags=q('.ti-tags');this.num=q('.ti-num');this.line=split(q('.ti-line'));this.pool=q('.ti-pool');
+},function(t){push(this.cam,t,this.dur,1,1.035,1420,600);W.boil(this.boil,t);show(this.s,t,.1,.8);show(this.tags,t,.9,.8);
+  fade(this.num,t,this.P(0),.5);wordsIn(this.line,t,this.P(0)+1.2,.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 03 — La réussite autour de lui… puis la solitude.
+sc('solitude',['03'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam so-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('so')+'<g class="so-boil">'+W.ground(930,900,1800,0)+W.figure('so-m',1340,926,1.08,false)+
+    '<g class="so-icons">'+W.house('so-h',1060,560,.55)+W.suitcase('so-v',1640,520,.7)+
+    '<g class="so-p"><path class="ink-thin" d="M1290 330 L1420 300 L1450 270 L1462 280 L1446 312 L1530 330 L1520 344 L1440 338 L1410 380 L1396 376 L1402 336 L1300 346 Z" style="fill:var(--paper2)"/></g></g></g></svg>'+
+    note('so-n',1500,760,'seul.',HANDG+';font-size:60px')+'</div>'+pool(800,0,1100,1000,'so-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><h2 class="line so-age" style="font-size:96px">74 ans.</h2><p class="sub so-sub">Une belle carrière, une vie confortable, des voyages à n’en plus finir.</p><h2 class="line so-line" style="font-size:62px">Il m’a parlé de sa solitude.</h2></div></div>';
+  const q=Q(r);this.cam=q('.so-cam');this.st=W.prep(r);this.boil=q('.so-boil');this.m=q('.so-m');this.ic=q('.so-icons');this.h=q('.so-h');this.v=q('.so-v');this.p=q('.so-p');this.n=q('.so-n');this.age=q('.so-age');this.sub=q('.so-sub');this.line=split(q('.so-line'));this.pool=q('.so-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1340,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.m,t,.2,.9);
+  show(this.h,t,P(1),.5);show(this.v,t,P(1)+.8,.5);show(this.p,t,P(1)+1.6,.5);this.ic.style.opacity=1-eo(seg(t,P(3)-.3,P(3)+.9));fade(this.n,t,P(3)+.6,.6,0);
+  fade(this.age,t,P(0),.6);fade(this.sub,t,P(1),.7);wordsIn(this.line,t,P(3));this.pool.style.opacity=.85+.1*Math.sin(t)-.25*eo(seg(t,P(3),P(3)+1.5))});
+
+// 04 — Venise, des dizaines de fois… jamais en amoureux. La place vide dans la gondole.
+sc('venise',['04'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ve-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ve')+'<g class="ve-boil">'+venice('ve-b',640)+gondola('ve-g',1300,860)+
+    W.figure('ve-m',1200,850,.55,false)+'<g class="ve-seat" transform="translate(1380 850) scale(.55)"><path d="M-34 0 L-30 -150 Q-48 -160 -56 -250 Q-58 -300 -20 -318 L20 -318 Q58 -300 56 -250 Q48 -160 30 -150 L34 0 Z" style="fill:none;stroke:var(--accent);stroke-width:5;stroke-dasharray:14 12"/><circle cy="-362" r="38" style="fill:none;stroke:var(--accent);stroke-width:5;stroke-dasharray:14 12"/></g></g></svg>'+
+    note('ve-n1',1000,200,'réunion',HANDG)+note('ve-n2',1520,230,'affaires',HANDG)+note('ve-n3',1560,860,'partager',';color:var(--accent);font-size:58px')+
+    '<svg class="art" viewBox="0 0 1920 1080" style="pointer-events:none"><path class="ve-x1" d="M990 232 H1170" style="stroke:var(--accent);stroke-width:5;stroke-linecap:round"/><path class="ve-x2" d="M1510 262 H1690" style="stroke:var(--accent);stroke-width:5;stroke-linecap:round"/></svg></div>'+
+    pool(800,0,1100,1000,'ve-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:240px;width:620px"><p class="sub ve-sub">« J’ai visité Venise des dizaines de fois. »</p><h2 class="line ve-line" style="font-size:74px">Mais jamais <span class="mark">en amoureux</span>.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ve-cam');this.boil=q('.ve-boil');this.b=q('.ve-b');this.g=q('.ve-g');this.m=q('.ve-m');this.seat=q('.ve-seat');this.n1=q('.ve-n1');this.n2=q('.ve-n2');this.n3=q('.ve-n3');this.x1=q('.ve-x1');this.x2=q('.ve-x2');this.sub=q('.ve-sub');this.line=q('.ve-line');this.pool=q('.ve-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1300,700);W.boil(this.boil,t);show(this.b,t,.1,1);show(this.g,t,.6,.8);show(this.m,t,.9,.8);
+  show(this.seat,t,P(2),.6);this.seat.style.opacity=(+this.seat.style.opacity)*(.75+.25*Math.sin(t*3));
+  fade(this.n1,t,P(3),.4,0);show(this.x1,t,P(3)+.6,.3);fade(this.n2,t,P(4),.4,0);show(this.x2,t,P(4)+.6,.3);fade(this.n3,t,P(5),.5,0);
+  fade(this.sub,t,P(0),.7);fade(this.line,t,P(1),.6);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 05 — La facilité qu'il refuse ; ce qu'il veut vraiment.
+sc('facilite',['05'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam fa-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('fa')+'<g class="fa-boil">'+
+    '<g class="fa-a"><rect x="960" y="250" width="380" height="290" rx="16" style="fill:var(--paper2)"/><rect class="ink-thin" x="960" y="250" width="380" height="290" rx="16"/>'+TXT('',1150,310,34,'la facilité','var(--second)')+
+    TXT('fa-t1',1150,390,31,'beaucoup plus jeune','var(--main)')+TXT('fa-t2',1150,460,31,'l’argent qui compte','var(--main)')+
+    '<path class="fa-x" d="M985 520 L1315 270" style="stroke:var(--accent);stroke-width:7;stroke-linecap:round"/></g>'+
+    '<g class="fa-b"><rect x="1420" y="250" width="380" height="430" rx="16" style="fill:var(--paper2)"/><rect class="ink-thin" x="1420" y="250" width="380" height="430" rx="16"/>'+TXT('',1610,310,34,'ce qu’il veut','var(--second)')+
+    TXT('fa-w1',1610,390,40,'parler','var(--main)')+TXT('fa-w2',1610,450,40,'rire','var(--main)')+TXT('fa-w3',1610,510,40,'voyager','var(--main)')+'</g>'+
+    W.heart('fa-h',1610,610,1.1)+'</g></svg>'+note('fa-n',1540,700,'sincère',';color:var(--accent);font-size:58px')+'</div>'+
+    pool(800,0,1100,1000,'fa-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="sub fa-sub">Avec sa situation, il aurait pu choisir la facilité.</p><h2 class="line fa-line" style="font-size:66px">Ce n’était pas ce qu’il voulait.</h2></div></div>';
+  const q=Q(r);this.cam=q('.fa-cam');this.boil=q('.fa-boil');this.a=q('.fa-a');this.t1=q('.fa-t1');this.t2=q('.fa-t2');this.x=q('.fa-x');this.b=q('.fa-b');this.w=[1,2,3].map(i=>q('.fa-w'+i));this.h=q('.fa-h');this.n=q('.fa-n');this.sub=q('.fa-sub');this.line=split(q('.fa-line'));this.pool=q('.fa-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1380,480);W.boil(this.boil,t);show(this.a,t,P(0)+.3,.6);show(this.t1,t,P(1),.4);show(this.t2,t,P(2),.4);show(this.x,t,P(3)+.2,.4);
+  show(this.b,t,P(4)-.3,.5);const pe=this.PE(4),ps=this.P(4);this.w.forEach((w,i)=>show(w,t,ps+i*(pe-ps)/3,.4));show(this.h,t,P(5)+.4,.5);fade(this.n,t,P(5)+.6,.5,0);
+  fade(this.sub,t,P(0),.7);wordsIn(this.line,t,P(3));this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 06 — Dix jours plus tard : elle apparaît. 50 ans.
+sc('elle',['06'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam el-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('el')+'<g class="el-boil">'+W.calendar('el-c',1120,470,.95,'J+10','','dix jours')+
+    W.ground(930,1300,1820,0)+W.woman('el-w',1580,926,1.06,true)+'</g></svg>'+note('el-age',1500,250,'50 ans',';color:var(--main);font-size:84px')+note('el-d',1460,340,'25 ans de moins',';color:var(--accent);font-size:56px')+'</div>'+
+    pool(800,0,1100,1000,'el-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:560px"><p class="sub el-sub">Dix jours plus tard, une femme apparaît dans ma recherche.</p><h2 class="line el-line" style="font-size:62px">Sa recherche est presque à l’inverse de ce qu’on imagine.</h2></div></div>';
+  const q=Q(r);this.cam=q('.el-cam');this.st=W.prep(r);this.boil=q('.el-boil');this.c=q('.el-c');this.w=q('.el-w');this.age=q('.el-age');this.d=q('.el-d');this.sub=q('.el-sub');this.line=split(q('.el-line'));this.pool=q('.el-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.c,t,.2,.6);show(this.w,t,P(0)+1.2,.9);fade(this.age,t,P(1),.5,0);fade(this.d,t,P(2),.5,0);
+  fade(this.sub,t,P(0),.7);wordsIn(this.line,t,P(3),.09);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 07 — Ce qu'elle cherche : liste barrée, liste cochée, le drapeau de golf en ocre.
+sc('recherche',['07'],function(r){
+  const flag='<g class="re-f" transform="translate(1660 900)"><ellipse cx="0" cy="0" rx="70" ry="14" style="fill:var(--main)"/><path class="ink" d="M0 0 V-330"/><path d="M0 -330 L120 -290 L0 -250 Z" style="fill:var(--accent)"/><path class="ink-thin" d="M0 -330 L120 -290 L0 -250"/></g>';
+  r.innerHTML='<div class="ground"><div class="cam re-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('re')+'<g class="re-boil">'+W.woman('re-w',1080,926,.95,false)+
+    '<g class="re-no">'+W.checklist('re-l',1240,300,['un homme fortuné','les sorties tardives','la fête le week-end'],true)+'</g>'+
+    '<g class="re-yes">'+W.checklist('re-k',1240,560,['la tranquillité','les voyages'],false)+
+    '<path class="re-c0" d="M1244 556 L1258 572 L1284 540" style="fill:none;stroke:var(--sage);stroke-width:6;stroke-linecap:round"/><path class="re-c1" d="M1244 626 L1258 642 L1284 610" style="fill:none;stroke:var(--sage);stroke-width:6;stroke-linecap:round"/></g>'+flag+'</g></svg>'+
+    note('re-n',1500,930,'le golf',';color:var(--accent);font-size:56px')+'</div>'+pool(800,0,1100,1000,'re-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:240px;width:600px"><p class="sub re-sub">Elle ne cherche pas un homme fortuné : elle a sa propre situation.</p><h2 class="line re-line" style="font-size:68px">Elle cherche un homme plus âgé.</h2></div></div>';
+  const q=Q(r);this.cam=q('.re-cam');this.boil=q('.re-boil');this.w=q('.re-w');this.li=[0,1,2].map(i=>q('.re-l-i'+i));this.lx=[0,1,2].map(i=>q('.re-l-x'+i));this.ki=[0,1].map(i=>q('.re-k-i'+i));this.kc=[0,1].map(i=>q('.re-c'+i));this.f=q('.re-f');this.n=q('.re-n');this.sub=q('.re-sub');this.line=split(q('.re-line'));this.pool=q('.re-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,560);W.boil(this.boil,t);show(this.w,t,.2,.8);
+  show(this.li[0],t,P(0)+.3,.4);show(this.lx[0],t,P(0)+1.4,.3);show(this.li[1],t,P(2),.4);show(this.lx[1],t,P(2)+.8,.3);show(this.li[2],t,P(2)+1.6,.4);show(this.lx[2],t,P(2)+2.4,.3);
+  show(this.ki[0],t,P(3),.4);show(this.kc[0],t,P(3)+.5,.3);show(this.ki[1],t,P(3)+1.1,.4);show(this.kc[1],t,P(3)+1.6,.3);show(this.f,t,P(4)+.6,.6);fade(this.n,t,this.PE(4)-.9,.5,0);
+  fade(this.sub,t,P(0),.7);wordsIn(this.line,t,P(1));this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 08 — La visioconférence : le doute, puis l'horloge qui tourne.
+sc('visio',['08'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam vi-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('vi')+'<g class="vi-boil">'+W.screen('vi-s',960,250,700,430)+
+    '<line x1="1310" y1="270" x2="1310" y2="660" style="stroke:var(--rule);stroke-width:3"/>'+W.figure('vi-m',1135,650,.95,false)+W.woman('vi-w',1485,650,.92,true)+
+    '<g class="vi-q"><circle cx="1135" cy="230" r="44" style="fill:var(--paper2)"/><circle class="ink-thin" cx="1135" cy="230" r="44"/>'+TXT('',1135,250,58,'?','var(--main)','middle','Fraunces,Georgia,serif')+'</g>'+
+    W.dial('vi-d',1760,820,120)+'</g></svg>'+note('vi-n',1600,960,'des heures',HANDG+';font-size:52px')+'</div>'+pool(800,0,1100,1000,'vi-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:240px;width:600px"><p class="sub vi-sub">Il avait demandé une femme de son âge.</p><h2 class="line vi-line" style="font-size:66px">Puis ils commencent à parler…</h2></div></div>';
+  const q=Q(r);this.r=r;this.cam=q('.vi-cam');this.boil=q('.vi-boil');this.s=q('.vi-s');this.m=q('.vi-m');this.w=q('.vi-w');this.qm=q('.vi-q');this.d=q('.vi-d');this.n=q('.vi-n');this.sub=q('.vi-sub');this.line=split(q('.vi-line'));this.pool=q('.vi-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1310,500);W.boil(this.boil,t);show(this.s,t,P(2),.6);show(this.m,t,P(2)+.5,.6);show(this.w,t,P(2)+1,.6);
+  this.qm.style.opacity=eo(seg(t,P(0),P(0)+.5))*(1-eo(seg(t,P(4),P(4)+.6)));show(this.d,t,P(5),.5);const m=lerp(0,300,eio(seg(t,P(5),this.dur)));W.hands(this.r,'vi-d',1760,820,8+m/60,m%60);fade(this.n,t,P(6),.5,0);
+  fade(this.sub,t,P(1),.7);wordsIn(this.line,t,P(4));this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 09-10 — La bascule, nuit : deux messages, vingt-quatre heures plus tard.
+sc('messages',['09','10'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam me-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="me-boil">'+W.moon('me-moon',1760,190,50)+
+    W.tel('me-t',1400,540,1.25,true)+'<path class="pencil" d="M1000 960 Q1400 948 1900 960"/></g></svg>'+
+    '<div class="me-b1" style="position:absolute;left:1268px;top:340px;width:250px;padding:14px 18px;border-radius:18px;background:var(--ground);font-family:Caveat,cursive;font-weight:600;font-size:40px;line-height:1.05;color:var(--main)"><span style="font-size:26px;color:var(--second)">elle</span><br>« Je suis toute bouleversée. »</div>'+
+    '<div class="me-b2" style="position:absolute;left:1290px;top:560px;width:250px;padding:14px 18px;border-radius:18px;background:var(--accent);font-family:Caveat,cursive;font-weight:600;font-size:42px;line-height:1.05;color:var(--night)"><span style="font-size:26px;color:var(--night);opacity:.7">lui</span><br>« Ça remue les tripes. »</div></div>'+
+    pool(1150,200,600,700,'me-pool')+
+    '<div class="words on-night" style="left:160px;top:300px;width:860px"><p class="hand me-h">24 heures plus tard</p><h2 class="line me-line" style="font-size:72px">je reçois deux messages.</h2></div></div>';
+  const q=Q(r);this.cam=q('.me-cam');this.boil=q('.me-boil');this.t=q('.me-t');this.moon=q('.me-moon');this.b1=q('.me-b1');this.b2=q('.me-b2');this.h=q('.me-h');this.line=split(q('.me-line'));this.pool=q('.me-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.06,1400,540);W.boil(this.boil,t);show(this.t,t,.2,.9);show(this.moon,t,.4,1.2);
+  fade(this.b1,t,P(1),.5,20);fade(this.b2,t,P(2),.5,20);fade(this.h,t,P(0),.5);wordsIn(this.line,t,P(0)+1.2,.12);
+  this.pool.style.opacity=(.2+.45*eo(seg(t,P(1),P(1)+1)))*(.92+.08*Math.sin(t*1.3))},{night:true});
+
+// 11 — Le décodage (sauge) : critères ≠, manière de vivre = ; la liste qui élimine tout le monde.
+sc('decodage',['11'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam de-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('de')+'<g class="de-boil">'+
+    '<g class="de-c">'+TXT('',1150,250,40,'leurs critères','var(--second)')+TXT('',1600,250,40,'leur façon de vivre','var(--second)')+
+    '<text x="1150" y="370" text-anchor="middle" style="font-family:Fraunces,Georgia,serif;font-size:110px;fill:var(--main)">≠</text><text class="de-eq" x="1600" y="370" text-anchor="middle" style="font-family:Fraunces,Georgia,serif;font-size:110px;fill:var(--sage)">=</text></g>'+
+    '<g class="de-list"><rect x="1080" y="470" width="560" height="430" rx="14" style="fill:var(--paper2)"/><rect class="ink-thin" x="1080" y="470" width="560" height="430" rx="14"/>'+
+    W.checklist('de-k',1130,560,['l’âge','la taille','le métier','aucun défaut'],true)+'</g>'+
+    '<g class="de-ppl">'+[0,1,2,3,4].map(i=>'<g class="de-p'+i+'" transform="translate('+(1700+(i%2)*80)+' '+(560+i*70)+') scale(.16)"><circle cy="-362" r="38" style="fill:var(--wash2)"/><path d="M-34 0 L-30 -150 Q-48 -160 -56 -250 Q-58 -300 -20 -318 L20 -318 Q58 -300 56 -250 Q48 -160 30 -150 L34 0 Z" style="fill:var(--wash2)"/></g>').join('')+'</g></g></svg></div>'+
+    pool(800,0,1100,1000,'de-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:220px;width:620px"><h2 class="line de-line" style="font-size:60px;color:var(--sage)">Leurs critères ne se ressemblaient pas. Leur manière de vivre, si.</h2><p class="sub de-sub">Une recherche trop fermée nous protège de la mauvaise rencontre…</p><p class="hand de-hand" style="color:var(--accent)">mais aussi de la bonne.</p></div></div>';
+  const q=Q(r);this.cam=q('.de-cam');this.boil=q('.de-boil');this.c=q('.de-c');this.eq=q('.de-eq');this.list=q('.de-list');this.ki=[0,1,2,3].map(i=>q('.de-k-i'+i));this.kx=[0,1,2,3].map(i=>q('.de-k-x'+i));this.pp=[0,1,2,3,4].map(i=>q('.de-p'+i));this.line=split(q('.de-line'));this.sub=q('.de-sub');this.hand=q('.de-hand');this.pool=q('.de-pool');
+},function(t){const P=this.P,n=this.keys,a=this.Bs('11'),e=this.Be('11'),L=e-a;push(this.cam,t,this.dur,1,1.035,1360,560);W.boil(this.boil,t);
+  show(this.c,t,P(0),.6);show(this.eq,t,P(1)+.3,.4);const s2=P(2);show(this.list,t,s2,.5);
+  this.ki.forEach((k,i)=>show(k,t,s2+.5+i*.9,.4));this.pp.forEach((p,i)=>{p.style.opacity=eo(seg(t,s2+.4,s2+1))*(1-eo(seg(t,s2+4+i*.5,s2+4.4+i*.5)))});
+  this.kx.forEach((k,i)=>show(k,t,s2+4+i*.5,.3));
+  wordsIn(this.line,t,P(0),.09);const lastA=e-L*0.24;fade(this.sub,t,lastA-2.6,.7);fade(this.hand,t,lastA,.6);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 12 — La fin : deux silhouettes sur le pont de Venise, le cœur ; la carte Entrelien.
+sc('fin',['12'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam fi-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('fi')+'<g class="fi-boil">'+venice('fi-b',820)+
+    W.figure('fi-m',1240,690,.62,false)+W.woman('fi-w',1350,690,.6,true)+W.heart('fi-h',1295,380,.9)+'</g></svg></div>'+
+    pool(1000,200,800,700,'fi-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:200px;width:820px"><p class="hand fi-a">Combien de temps ? Personne ne le sait.</p><h2 class="line fi-line" style="font-size:62px">Il a trouvé quelqu’un qui voulait vivre la même chose que lui.</h2></div>'+
+    '<div class="words" style="left:260px;bottom:140px;width:900px;gap:8px"><p class="line fi-name" style="font-size:124px;font-weight:500">Entrelien</p><p class="sub fi-tag">Les Carnets de l’Entremetteur</p></div></div>';
+  const q=Q(r);this.cam=q('.fi-cam');this.boil=q('.fi-boil');this.b=q('.fi-b');this.m=q('.fi-m');this.w=q('.fi-w');this.h=q('.fi-h');this.a=q('.fi-a');this.line=split(q('.fi-line'));this.name=q('.fi-name');this.tag=q('.fi-tag');this.pool=q('.fi-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1.03,1,1300,600);W.boil(this.boil,t);show(this.b,t,.1,1);show(this.m,t,.5,.8);show(this.w,t,P(3),.8);show(this.h,t,P(4)+1,.6);
+  fade(this.a,t,P(0),.6);wordsIn(this.line,t,P(4),.09);fade(this.name,t,P(5)+.2,.8,20);fade(this.tag,t,P(5)+.7,.6);this.pool.style.opacity=.75+.1*Math.sin(t)});
+
+startFilm();
+</script></body></html>

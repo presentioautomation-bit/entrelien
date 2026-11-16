@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"></head>
+<body><div id="stage"></div>
+<script src="file:///home/claude/prod/lib/engine.js"></script>
+<script src="timing.js"></script>
+<script>
+// Carnet n°3 — « Les applications de rencontre fabriquent-elles des célibataires éternels ? »
+// Fil rouge : la pile de profils qui ne s'épuise jamais ; en ocre, « la suivante ».
+const Q=r=>s=>r.querySelector(s);
+const G='color:var(--second)';
+const pcard=(x,y,rot,fill,stroke,cls)=>'<g class="'+(cls||'')+'" transform="translate('+x+' '+y+') rotate('+rot+')"><rect x="-110" y="-150" width="220" height="300" rx="16" style="fill:'+(fill||'var(--paper2)')+';stroke:'+(stroke||'var(--main)')+';stroke-width:3"/><circle cy="-50" r="44" style="fill:var(--wash2)"/><path d="M-70 50 Q0 -10 70 50" style="fill:var(--wash2)"/><path d="M-70 95 H70 M-70 120 H30" style="stroke:var(--second);stroke-width:4;opacity:.5"/></g>';
+const deck=(cls,x,y,n)=>'<g class="'+cls+'">'+Array.from({length:n},(_,i)=>pcard(x+i*6,y-i*6,(i%2?3:-3)*(i/n))).join('')+'</g>';
+
+// 01 — Accroche, nuit : le coupable idéal.
+sc('accroche',['01'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam ac-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="ac-boil">'+W.moon('ac-moon',1760,180,48)+W.tel('ac-t',1400,540,1.2,true,
+    '<g class="ac-e"><circle r="70" style="fill:none;stroke:var(--ground);stroke-width:5"/>'+TXT('',0,26,80,'€','var(--ground)','middle','Fraunces,Georgia,serif')+'</g>')+'</g></svg>'+
+    '<p class="note ac-n" style="left:1560px;top:250px;font-size:64px;color:var(--accent);transform:rotate(-6deg)">coupable ?</p></div>'+pool(1100,180,700,760,'ac-pool')+
+    '<div class="words on-night" style="left:160px;top:250px;width:860px"><p class="sub ac-sub">« Une application qui vit de vos abonnements n’a aucun intérêt à ce que vous trouviez l’amour. »</p><h1 class="line ac-line" style="font-size:68px">L’argument est séduisant. Mais il oublie l’essentiel.</h1></div></div>';
+  const q=Q(r);this.cam=q('.ac-cam');this.boil=q('.ac-boil');this.t=q('.ac-t');this.moon=q('.ac-moon');this.e=q('.ac-e');this.n=q('.ac-n');this.sub=q('.ac-sub');this.line=split(q('.ac-line'));this.pool=q('.ac-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.05,1400,540);W.boil(this.boil,t);show(this.t,t,.1,.8);show(this.moon,t,.4,1.2);show(this.e,t,P(0)+1.5,.5);fade(this.n,t,P(2),.5,0);
+  fade(this.sub,t,P(0),.7);wordsIn(this.line,t,P(1),.1);this.pool.style.opacity=(.3+.05*Math.sin(t*1.2))*eo(seg(t,.4,1.6))},{night:true});
+
+// 02 — Titre : la pile de profils.
+sc('titre',['02'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ti-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ti')+'<g class="ti-boil">'+deck('ti-d',1400,560,7)+pcard(1560,520,8,'var(--paper2)','var(--accent)','ti-o')+'</g></svg></div>'+
+    pool(900,100,1100,900,'ti-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:280px;width:760px"><p class="hand ti-num">Carnet n°3</p><h1 class="line ti-line" style="font-size:66px">Les applications de rencontre fabriquent-elles des célibataires éternels ?</h1></div></div>';
+  const q=Q(r);this.cam=q('.ti-cam');this.boil=q('.ti-boil');this.d=q('.ti-d');this.o=q('.ti-o');this.num=q('.ti-num');this.line=split(q('.ti-line'));this.pool=q('.ti-pool');
+},function(t){push(this.cam,t,this.dur,1,1.035,1440,540);W.boil(this.boil,t);show(this.d,t,.1,.6);show(this.o,t,1.2,.5);fade(this.num,t,this.P(0),.5);wordsIn(this.line,t,this.P(0)+1,.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 03 — Ce que l'argument a de juste : le tableau de bord, et les couples qui partent sans prévenir.
+sc('juste',['03'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ju-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ju')+'<g class="ju-boil">'+
+    '<rect x="1000" y="240" width="520" height="420" rx="16" style="fill:var(--paper2)"/><rect class="ink-thin" x="1000" y="240" width="520" height="420" rx="16"/>'+TXT('',1260,300,30,'tableau de bord','var(--second)')+
+    [0,1,2].map(i=>'<rect class="ju-b'+i+'" x="'+(1070+i*150)+'" y="340" width="90" height="260" style="fill:var(--wash2)"/>'+TXT('',1115+i*150,640,24,['connexions','messages','retours'][i],'var(--second)')).join('')+
+    '<g class="ju-c" transform="translate(-150 0)">'+W.ground(930,1560,1860,0)+W.figure('',1650,926,.7,false)+W.woman('',1740,926,.68,false)+'<path class="ink-thin" d="M1600 600 V926 M1600 600 H1820 V926" style="stroke-dasharray:10 8"/></g></g></svg>'+
+    note('ju-n',1400,520,'partis vivre leur vie',';color:var(--sage);font-size:42px')+'</div>'+pool(800,0,1100,1000,'ju-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="sub ju-sub">Ce que l’argument a de juste, d’abord.</p><h2 class="line ju-line" style="font-size:56px">Aucun tableau de bord ne compte les couples qui sont partis.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ju-cam');this.st=W.prep(r);this.boil=q('.ju-boil');this.b=[0,1,2].map(i=>q('.ju-b'+i));this.c=q('.ju-c');this.n=q('.ju-n');this.sub=q('.ju-sub');this.line=split(q('.ju-line'));this.pool=q('.ju-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,520);W.draw(this.st,t);W.boil(this.boil,t);this.b.forEach((b,i)=>{const g=eo(seg(t,P(1)+i*.6,P(1)+i*.6+1));b.setAttribute('y',(600-260*g*(.6+.15*i)).toFixed(0));b.setAttribute('height',(260*g*(.6+.15*i)).toFixed(0))});
+  show(this.c,t,P(2)+.5,.6);fade(this.n,t,P(3),.5,0);fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(2),.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 04 — Les mécaniques du jeu : mise en avant, limite, notification.
+sc('mecaniques',['04'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam me-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('me')+'<g class="me-boil">'+
+    '<g class="me-a"><path d="M1120 330 L1146 390 L1210 395 L1160 438 L1176 500 L1120 466 L1064 500 L1080 438 L1030 395 L1094 390 Z" style="fill:var(--accent)"/>'+TXT('',1120,560,30,'mise en avant','var(--second)')+'</g>'+
+    '<g class="me-b"><rect x="1310" y="350" width="180" height="130" rx="14" style="fill:var(--paper2);stroke:var(--main);stroke-width:3"/>'+TXT('',1400,435,52,'0 / 5','var(--main)','middle','Fraunces,Georgia,serif')+TXT('',1400,560,30,'limite du jour','var(--second)')+'</g>'+
+    '<g class="me-c"><path class="ink-thin" d="M1680 330 Q1720 330 1724 390 L1730 450 L1750 470 H1610 L1630 450 L1636 390 Q1640 330 1680 330 Z" style="fill:var(--paper2)"/><circle cx="1730" cy="340" r="24" style="fill:var(--accent)"/>'+TXT('',1680,560,30,'22 h 47','var(--second)')+'</g>'+
+    '<path class="me-drop" d="M1400 700 Q1440 760 1400 800 Q1360 760 1400 700 Z" style="fill:var(--accent)"/></g></svg>'+note('me-n',1450,740,'une dose d’espoir, chaque soir',';color:var(--accent);font-size:44px')+'</div>'+
+    pool(800,0,1100,1000,'me-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><h2 class="line me-line" style="font-size:60px">Certaines mécaniques viennent du jeu vidéo, pas de l’entremise.</h2></div></div>';
+  const q=Q(r);this.cam=q('.me-cam');this.boil=q('.me-boil');this.a=q('.me-a');this.b=q('.me-b');this.c=q('.me-c');this.d=q('.me-drop');this.n=q('.me-n');this.line=split(q('.me-line'));this.pool=q('.me-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,480);W.boil(this.boil,t);show(this.a,t,P(1),.4);show(this.b,t,P(2),.4);show(this.c,t,P(3),.4);this.c.setAttribute('transform','rotate('+(t>P(3)?6*Math.sin(t*14)*Math.max(0,1-(t-P(3))/1.5):0).toFixed(1)+' 1680 330)');
+  show(this.d,t,P(4),.5);fade(this.n,t,P(4)+.3,.5,0);wordsIn(this.line,t,P(0),.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 05 — Ce que l'argument oublie… elles fabriquent autre chose.
+sc('oublie',['05'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ou-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ou')+'<g class="ou-boil">'+W.tel('ou-t',1200,540,1,false,TXT('',0,10,30,'0 membre','var(--second)'))+W.calendar('ou-c',1620,520,.9,'','bien avant elles','le célibat')+'</g></svg>'+
+    note('ou-n',1090,830,'se vide',G+';font-size:46px')+'</div>'+pool(800,0,1100,1000,'ou-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="sub ou-sub">Une application où personne ne rencontre personne finit par se vider.</p><h2 class="line ou-line" style="font-size:62px">Je crois qu’elles fabriquent autre chose.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ou-cam');this.boil=q('.ou-boil');this.t=q('.ou-t');this.c=q('.ou-c');this.n=q('.ou-n');this.sub=q('.ou-sub');this.line=split(q('.ou-line'));this.pool=q('.ou-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,540);W.boil(this.boil,t);show(this.t,t,P(0),.5);this.t.style.opacity=(+this.t.style.opacity)*(1-.5*eo(seg(t,P(0)+2,P(1))));fade(this.n,t,P(0)+1.8,.5,0);show(this.c,t,P(1),.5);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(3),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 06 — La bascule, nuit : il reste toujours quelqu'un d'autre.
+sc('conviction',['06'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam co-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="co-boil">'+
+    Array.from({length:9},(_,i)=>'<g class="co-c'+i+'" style="opacity:0">'+pcard(1300+i*40,560-i*14,(i-4)*3,'var(--nightlift)',i===8?'var(--accent)':'var(--ground)')+'</g>').join('')+'</g></svg></div>'+pool(1150,200,600,700,'co-pool')+
+    '<div class="words on-night" style="left:160px;top:300px;width:860px"><p class="hand co-h">La conviction…</p><h2 class="line co-line" style="font-size:76px">qu’il reste toujours quelqu’un d’autre à découvrir.</h2></div></div>';
+  const q=Q(r);this.cam=q('.co-cam');this.boil=q('.co-boil');this.c=Array.from({length:9},(_,i)=>q('.co-c'+i));this.h=q('.co-h');this.line=split(q('.co-line'));this.pool=q('.co-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.06,1450,540);W.boil(this.boil,t);this.c.forEach((c,i)=>show(c,t,.2+i*.35,.35));
+  fade(this.h,t,P(0),.5);wordsIn(this.line,t,P(1),.1);this.pool.style.opacity=(.2+.45*eo(seg(t,P(1),P(1)+1)))*(.92+.08*Math.sin(t*1.3))},{night:true,lead:1.5});
+
+// 07 — Décodage (sauge) : l'accès est abondant ; le problème, c'est l'arrêt.
+sc('arret',['07'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ar-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ar')+'<g class="ar-boil">'+W.ground(930,960,1840,0)+
+    [0,1,2,3,4].map(i=>'<rect class="ink-thin" x="'+(1000+i*150)+'" y="640" width="90" height="290" rx="6" style="fill:var(--paper2)"/>').join('')+W.figure('ar-m',1220,926,.9,false)+
+    '<g class="ar-stop"><path class="ink" d="M1760 930 V600"/><path d="M1720 470 L1800 470 L1840 510 V570 L1800 610 H1720 L1680 570 V510 Z" style="fill:var(--accent)"/>'+TXT('',1760,552,30,'STOP','var(--ground)','middle','Work Sans,sans-serif')+'</g></g></svg></div>'+
+    pool(800,0,1100,1000,'ar-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub ar-sub">Cette conviction n’empêche pas de rencontrer. Elle empêche de conclure.</p><h2 class="line ar-line" style="font-size:66px;color:var(--sage)">Le problème, c’est l’arrêt.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ar-cam');this.st=W.prep(r);this.boil=q('.ar-boil');this.m=q('.ar-m');this.stop=q('.ar-stop');this.sub=q('.ar-sub');this.line=split(q('.ar-line'));this.pool=q('.ar-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,620);W.draw(this.st,t);W.boil(this.boil,t);show(this.boil,t,.1,.6);const x=lerp(1050,1580,seg(t,P(0),P(3)));this.m.setAttribute('transform','translate('+x.toFixed(0)+' 926) scale(.9)');
+  show(this.stop,t,P(3),.5);fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(3),.12);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 08 — Choisir, c'est renoncer.
+sc('renoncer',['08'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam re-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('re')+'<g class="re-boil">'+deck('re-d',1650,520,8)+pcard(1180,520,-4,'var(--paper2)','var(--sage)','re-one')+W.heart('re-h',1180,330,.8,'var(--sage)')+'</g></svg>'+
+    note('re-n',1530,780,'tout ce qui reste disponible',G+';font-size:42px')+'</div>'+pool(800,0,1100,1000,'re-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:270px;width:600px"><h2 class="line re-line" style="font-size:66px;color:var(--sage)">Car choisir, c’est renoncer.</h2><p class="sub re-sub">Même quand la personne en face vous convient parfaitement.</p></div></div>';
+  const q=Q(r);this.cam=q('.re-cam');this.boil=q('.re-boil');this.d=q('.re-d');this.one=q('.re-one');this.h=q('.re-h');this.n=q('.re-n');this.line=split(q('.re-line'));this.sub=q('.re-sub');this.pool=q('.re-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,520);W.boil(this.boil,t);show(this.one,t,P(0)+.3,.5);show(this.d,t,P(1),.6);fade(this.n,t,P(1)+1.5,.5,0);show(this.h,t,P(2),.5);
+  wordsIn(this.line,t,P(0),.1);fade(this.sub,t,P(2),.6);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 09 — Ceux qui s'en servent bien : ils partent quand ça commence.
+sc('bien',['09'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam bi-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('bi')+'<g class="bi-boil">'+W.ground(930,960,1840,0)+
+    '<path class="ink" d="M1000 760 H1240 M1030 760 V930 M1210 760 V930"/>'+W.tel('bi-t',1120,700,.22,false)+W.figure('bi-m',1480,926,1,false)+W.woman('bi-w',1600,926,.98,true)+W.heart('bi-h',1540,420,.7)+'</g></svg>'+
+    note('bi-n',1000,640,'l’outil reste sur la table',G+';font-size:40px')+'</div>'+pool(800,0,1100,1000,'bi-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub bi-sub">Certaines personnes s’en servent très bien.</p><h2 class="line bi-line" style="font-size:58px">Elles quittent l’application dès que quelque chose commence.</h2></div></div>';
+  const q=Q(r);this.cam=q('.bi-cam');this.st=W.prep(r);this.boil=q('.bi-boil');this.t=q('.bi-t');this.m=q('.bi-m');this.w=q('.bi-w');this.h=q('.bi-h');this.n=q('.bi-n');this.sub=q('.bi-sub');this.line=split(q('.bi-line'));this.pool=q('.bi-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,620);W.draw(this.st,t);W.boil(this.boil,t);show(this.t,t,.1,.5);show(this.m,t,P(1),.6);show(this.w,t,P(1)+.6,.6);show(this.h,t,P(2)+.4,.5);fade(this.n,t,P(4),.5,0);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(2),.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 10 — Trois habitudes : un délai, un nombre limité…
+sc('habitudes',['10'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ha-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ha')+'<g class="ha-boil">'+
+    '<g class="ha-a">'+W.calendar('',1180,500,.9,'10','jours','un délai')+'</g>'+
+    '<g class="ha-b"><rect x="1420" y="330" width="360" height="380" rx="16" style="fill:var(--paper2)"/><rect class="ink-thin" x="1420" y="330" width="360" height="380" rx="16"/>'+TXT('',1600,390,30,'conversations','var(--second)')+
+    [0,1,2].map(i=>'<rect x="1460" y="'+(430+i*80)+'" width="280" height="56" rx="12" style="fill:var(--sage);opacity:.85"/>').join('')+TXT('',1600,770,34,'3 plutôt que 20','var(--sage)')+'</g></g></svg></div>'+
+    pool(800,0,1100,1000,'ha-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="hand ha-h">Trois habitudes changent tout.</p><h2 class="line ha-line" style="font-size:58px">Fixer un délai. Limiter le nombre.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ha-cam');this.boil=q('.ha-boil');this.a=q('.ha-a');this.b=q('.ha-b');this.h=q('.ha-h');this.line=split(q('.ha-line'));this.pool=q('.ha-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,520);W.boil(this.boil,t);show(this.a,t,P(1),.5);show(this.b,t,P(2),.5);fade(this.h,t,P(0),.5);wordsIn(this.line,t,P(1),.12);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 11 — … et désinstaller pendant qu'on essaie.
+sc('desinstaller',['11'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam de-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('de')+'<g class="de-boil">'+W.tel('de-t',1300,520,1.1,false)+
+    '<g class="de-app"><rect x="-60" y="-60" width="120" height="120" rx="28" style="fill:var(--accent)"/><path d="M0 26 C-36 0 -30 -34 -8 -30 Q0 -28 0 -18 Q0 -28 8 -30 C30 -34 36 0 0 26 Z" style="fill:var(--ground)"/></g>'+
+    '<g class="de-bin"><path class="ink" d="M1640 560 H1800 M1660 560 L1676 760 H1764 L1780 560 M1690 560 V530 H1750 V560" style="fill:var(--paper2)"/></g></g></svg></div>'+
+    pool(800,0,1100,1000,'de-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><h2 class="line de-line" style="font-size:62px">Et désinstaller pendant qu’on essaie.</h2><p class="sub de-sub">Continuer en parallèle, c’est se dire que rien n’a vraiment commencé.</p></div></div>';
+  const q=Q(r);this.cam=q('.de-cam');this.boil=q('.de-boil');this.app=q('.de-app');this.bin=q('.de-bin');this.line=split(q('.de-line'));this.sub=q('.de-sub');this.pool=q('.de-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1450,520);W.boil(this.boil,t);show(this.bin,t,.3,.5);const g=eio(seg(t,P(1)-1.2,P(1)+.6));
+  this.app.setAttribute('transform','translate('+lerp(1300,1720,g).toFixed(0)+' '+(lerp(480,600,g)-Math.sin(g*Math.PI)*120).toFixed(0)+') scale('+lerp(1,.5,g).toFixed(2)+')');this.app.style.opacity=1-seg(t,P(1)+.5,P(1)+.9);
+  wordsIn(this.line,t,P(0),.1);fade(this.sub,t,P(1),.6);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 12 — La fin : le catalogue. Entrelien.
+sc('fin',['12'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam fi-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('fi')+'<g class="fi-boil">'+
+    '<g transform="translate(1480 520)"><path d="M-260 -180 Q-130 -220 0 -180 Q130 -220 260 -180 V200 Q130 160 0 200 Q-130 160 -260 200 Z" style="fill:var(--paper2)"/><path class="ink" d="M-260 -180 Q-130 -220 0 -180 Q130 -220 260 -180 V200 Q130 160 0 200 Q-130 160 -260 200 Z M0 -180 V200"/>'+
+    [0,1,2,3].map(i=>'<rect x="'+(i%2?40:-220)+'" y="'+(-140+Math.floor(i/2)*170)+'" width="180" height="140" rx="10" style="fill:var(--wash);stroke:var(--second);stroke-width:2"/>').join('')+'</g></g></svg>'+
+    note('fi-n',1380,780,'le catalogue',';color:var(--accent);font-size:50px')+'</div>'+pool(1000,150,800,700,'fi-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:200px;width:800px"><p class="hand fi-a">Une seule personne, pour être tout à la fois.</p><h2 class="line fi-line" style="font-size:60px">Les applications n’ont pas créé cette exigence. Elles nous en offrent le catalogue.</h2></div>'+
+    '<div class="words" style="left:260px;bottom:140px;width:900px;gap:8px"><p class="line fi-name" style="font-size:124px;font-weight:500">Entrelien</p><p class="sub fi-tag">Les Carnets de l’Entremetteur</p></div></div>';
+  const q=Q(r);this.cam=q('.fi-cam');this.boil=q('.fi-boil');this.n=q('.fi-n');this.a=q('.fi-a');this.line=split(q('.fi-line'));this.name=q('.fi-name');this.tag=q('.fi-tag');this.pool=q('.fi-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1.03,1,1480,520);W.boil(this.boil,t);show(this.boil,t,.1,.7);fade(this.n,t,P(2),.5,0);
+  fade(this.a,t,P(0),.6);wordsIn(this.line,t,P(1),.08);fade(this.name,t,P(3)+.2,.8,20);fade(this.tag,t,P(3)+.7,.6);this.pool.style.opacity=.75+.1*Math.sin(t)});
+
+startFilm();
+</script></body></html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"></head>
+<body><div id="stage"></div>
+<script src="file:///home/claude/prod/lib/engine.js"></script>
+<script src="timing.js"></script>
+<script>
+// Carnet n°1 — « Pourquoi les brouteurs exploitent davantage notre ego que notre naïveté »
+// Fil rouge : le projecteur — l'attention totale qu'on braque sur quelqu'un (faisceau ocre).
+const Q=r=>s=>r.querySelector(s);
+const G='color:var(--second)';
+const beam=(cls,x,y,w,h,col,op)=>'<path class="'+cls+'" d="M'+x+' '+y+' L'+(x-w/2)+' '+(y+h)+' L'+(x+w/2)+' '+(y+h)+' Z" style="fill:'+(col||'var(--accent)')+';opacity:'+(op||.25)+'"/>';
+const lamp=(cls,x,y)=>'<g class="'+cls+'"><path d="M'+(x-40)+' '+(y-30)+' L'+(x+40)+' '+(y-30)+' L'+(x+60)+' '+(y+20)+' L'+(x-60)+' '+(y+20)+' Z" style="fill:var(--main)"/><path class="ink-thin" d="M'+x+' '+(y-30)+' V'+(y-120)+'"/></g>';
+
+// 01 — Accroche, nuit : « J'ai été crédule » ? Non. Autre chose.
+sc('accroche',['01'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam ac-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="ac-boil">'+W.moon('ac-moon',1760,180,48)+'<path class="pencil" d="M1000 930 Q1400 918 1880 930"/>'+W.woman('ac-w',1380,926,1.1,false,'var(--nightlift)')+'</g></svg>'+
+    '<p class="note ac-c" style="left:1130px;top:300px;font-size:58px;color:var(--ground)">« J’ai été crédule »</p><svg class="art" viewBox="0 0 1920 1080"><path class="ac-x" d="M1120 345 H1580" style="stroke:var(--accent);stroke-width:7;stroke-linecap:round"/></svg></div>'+pool(1100,180,700,760,'ac-pool')+
+    '<div class="words on-night" style="left:160px;top:280px;width:840px"><p class="sub ac-sub">Quand une personne me raconte l’arnaque dont elle sort…</p><h1 class="line ac-line" style="font-size:70px">elle me dit autre chose. Et c’est beaucoup plus inquiétant.</h1></div></div>';
+  const q=Q(r);this.cam=q('.ac-cam');this.boil=q('.ac-boil');this.w=q('.ac-w');this.moon=q('.ac-moon');this.c=q('.ac-c');this.x=q('.ac-x');this.sub=q('.ac-sub');this.line=split(q('.ac-line'));this.pool=q('.ac-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.05,1380,600);W.boil(this.boil,t);show(this.w,t,.1,.8);show(this.moon,t,.4,1.2);fade(this.c,t,P(0)+3,.5,0);show(this.x,t,P(1),.4);
+  fade(this.sub,t,P(0),.7);wordsIn(this.line,t,P(1),.1);this.pool.style.opacity=(.3+.05*Math.sin(t*1.2))*eo(seg(t,.4,1.6))},{night:true});
+
+// 02 — Titre : le projecteur.
+sc('titre',['02'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ti-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ti')+'<g class="ti-boil">'+lamp('ti-l',1440,250)+beam('ti-b',1440,270,520,660)+W.ground(930,1150,1730,0)+W.woman('ti-w',1440,926,.95,false)+'</g></svg></div>'+
+    pool(900,100,1100,900,'ti-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:280px;width:760px"><p class="hand ti-num">Carnet n°1</p><h1 class="line ti-line" style="font-size:66px">Pourquoi les brouteurs exploitent davantage notre ego que notre naïveté</h1></div></div>';
+  const q=Q(r);this.cam=q('.ti-cam');this.st=W.prep(r);this.boil=q('.ti-boil');this.b=q('.ti-b');this.num=q('.ti-num');this.line=split(q('.ti-line'));this.pool=q('.ti-pool');
+},function(t){push(this.cam,t,this.dur,1,1.035,1440,560);W.draw(this.st,t);W.boil(this.boil,t);this.b.style.opacity=.25*eo(seg(t,.5,1.5));fade(this.num,t,this.P(0),.5);wordsIn(this.line,t,this.P(0)+1,.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 03 — La « victime idéale » : une image confortable… et fausse.
+sc('ideale',['03'],function(r){
+  const T=['isolée','mal informée','naïve'];
+  r.innerHTML='<div class="ground"><div class="cam id-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('id')+'<g class="id-boil">'+
+    '<rect x="1080" y="240" width="560" height="600" rx="16" style="fill:var(--paper2)"/><rect class="ink-thin" x="1080" y="240" width="560" height="600" rx="16" style="stroke-dasharray:14 10"/>'+TXT('',1360,300,32,'la victime « idéale »','var(--second)')+
+    '<g transform="translate(1360 650) scale(.7)"><path d="M-34 0 L-30 -150 Q-48 -160 -56 -250 Q-58 -300 -20 -318 L20 -318 Q58 -300 56 -250 Q48 -160 30 -150 L34 0 Z" style="fill:var(--wash)"/><circle cy="-362" r="38" style="fill:var(--wash)"/></g>'+
+    T.map((s,i)=>'<g class="id-t'+i+'">'+TXT('',1360,720+i*0,0,'','')+'</g>').join('')+'</g></svg>'+
+    T.map((s,i)=>note('id-n'+i,[1110,1420,1180][i],[380,420,680][i],s,G+';font-size:44px')).join('')+
+    '<svg class="art" viewBox="0 0 1920 1080"><path class="id-x" d="M1100 820 L1620 260" style="stroke:var(--accent);stroke-width:8;stroke-linecap:round"/></svg></div>'+
+    pool(800,0,1100,1000,'id-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="sub id-sub">C’est une image confortable. Elle nous met à l’abri.</p><h2 class="line id-line" style="font-size:64px">Mais elle est largement fausse.</h2></div></div>';
+  const q=Q(r);this.cam=q('.id-cam');this.boil=q('.id-boil');this.n=[0,1,2].map(i=>q('.id-n'+i));this.x=q('.id-x');this.sub=q('.id-sub');this.line=split(q('.id-line'));this.pool=q('.id-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1360,540);W.boil(this.boil,t);show(this.boil,t,P(0),.5);this.n.forEach((n,i)=>fade(n,t,P(0)+1.2+i*.8,.4,0));show(this.x,t,P(3),.4);
+  fade(this.sub,t,P(1),.6);wordsIn(this.line,t,P(3),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 04 — Des gens avertis : ils savaient. Ça n'a rien empêché.
+sc('avertis',['04'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam av-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('av')+'<g class="av-boil">'+W.ground(930,960,1840,0)+
+    W.figure('av-a',1080,926,.9,false)+W.woman('av-b',1300,926,.9,false)+W.figure('av-c',1520,926,.9,true)+W.woman('av-d',1740,926,.88,true)+
+    '<g class="av-al"><path d="M1410 300 L1470 400 H1350 Z" style="fill:var(--accent)"/>'+TXT('',1410,392,56,'!','var(--ground)','middle','Fraunces,Georgia,serif')+'</g></g></svg>'+
+    note('av-n',1000,470,'cadres, enseignants, informaticien…',G+';font-size:42px')+'</div>'+pool(800,0,1100,1000,'av-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:560px"><p class="sub av-sub">Des gens qui savaient parfaitement reconnaître un signal d’alarme.</p><h2 class="line av-line" style="font-size:64px">Ils le savaient. Ça n’a rien empêché.</h2></div></div>';
+  const q=Q(r);this.cam=q('.av-cam');this.st=W.prep(r);this.boil=q('.av-boil');this.f=['a','b','c','d'].map(i=>q('.av-'+i));this.al=q('.av-al');this.n=q('.av-n');this.sub=q('.av-sub');this.line=split(q('.av-line'));this.pool=q('.av-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,620);W.draw(this.st,t);W.boil(this.boil,t);this.f.forEach((f,i)=>show(f,t,P(0)+.4+i*.5,.5));fade(this.n,t,P(0)+1.5,.5,0);show(this.al,t,P(1)+1,.4);
+  fade(this.sub,t,P(1),.6);wordsIn(this.line,t,P(2),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 05 — L'attention totale : le matin, le soir, le nom du chien, le médecin.
+sc('attention',['05'],function(r){
+  const M=['Bonjour, bien dormi ?','Et votre chien, comment va-t-il ?','Et ce rendez-vous chez le médecin ?','Bonne nuit, je pense à vous.'];
+  r.innerHTML='<div class="ground"><div class="cam at-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('at')+'<g class="at-boil">'+W.tel('at-t',1420,540,1.35,false)+'</g></svg>'+
+    M.map((s,i)=>'<div class="at-m'+i+'" style="position:absolute;left:1290px;top:'+(300+i*120)+'px;width:250px;padding:12px 18px;border-radius:18px 18px 18px 4px;background:var(--accent);color:var(--night);font-family:Work Sans,sans-serif;font-weight:500;font-size:24px;line-height:1.25;opacity:0">'+s+'</div>').join('')+
+    note('at-n',1650,320,'le matin',G+';font-size:42px')+note('at-n2',1650,700,'le soir',G+';font-size:42px')+'</div>'+pool(800,0,1100,1000,'at-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub at-sub">Ce que le brouteur vend, ce n’est pas une histoire d’amour.</p><h2 class="line at-line" style="font-size:66px">C’est une attention totale.</h2></div></div>';
+  const q=Q(r);this.cam=q('.at-cam');this.boil=q('.at-boil');this.m=[0,1,2,3].map(i=>q('.at-m'+i));this.n=q('.at-n');this.n2=q('.at-n2');this.sub=q('.at-sub');this.line=split(q('.at-line'));this.pool=q('.at-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1420,540);W.boil(this.boil,t);[2,3,4,4].forEach((k,i)=>fade(this.m[i],t,P(k)+(i===3?1.5:.2),.4,10));fade(this.n,t,P(2),.4,0);fade(this.n2,t,P(4)+1.5,.4,0);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 06 — La bascule, nuit : « Il m'a fait croire que j'étais quelqu'un dont on peut tomber amoureux. »
+sc('phrase',['06'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam ph-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="ph-boil">'+lamp('ph-l',1500,180)+beam('ph-b',1500,200,560,740,'var(--accent)',.3)+'<path class="pencil" d="M1100 940 Q1500 928 1880 940"/>'+W.woman('ph-w',1500,936,1.05,false,'var(--nightlift)')+'</g></svg></div>'+pool(1150,200,700,700,'ph-pool')+
+    '<div class="words on-night" style="left:160px;top:250px;width:860px"><p class="sub ph-sub">« Il ne m’a pas fait croire qu’il m’aimait.</p><h2 class="line ph-line" style="font-size:66px">Il m’a fait croire que j’étais quelqu’un dont on peut tomber amoureux. »</h2></div></div>';
+  const q=Q(r);this.cam=q('.ph-cam');this.boil=q('.ph-boil');this.b=q('.ph-b');this.w=q('.ph-w');this.sub=q('.ph-sub');this.line=split(q('.ph-line'));this.pool=q('.ph-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.06,1500,560);W.boil(this.boil,t);show(this.w,t,.1,.8);this.b.style.opacity=.32*eo(seg(t,P(1),P(1)+1.2));
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.11);this.pool.style.opacity=(.2+.45*eo(seg(t,P(1),P(1)+1)))*(.92+.08*Math.sin(t*1.3))},{night:true,lead:1.5});
+
+// 07 — La pénurie, puis le surplus : le contraste fait le reste.
+sc('penurie',['07'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam pe-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('pe')+'<g class="pe-boil">'+W.ground(930,1000,1800,0)+W.woman('pe-w',1400,926,1.05,false,'var(--wash)')+
+    '<g class="pe-hearts">'+Array.from({length:12},(_,i)=>W.heart('pe-h'+i,1180+((i*137)%440),240+((i*97)%380),.35+((i*13)%5)*.07)).join('')+'</g></g></svg>'+
+    note('pe-n1',1000,600,'on ne la regarde plus',G+';font-size:42px')+note('pe-n2',1620,640,'un surplus',';color:var(--accent);font-size:50px')+'</div>'+
+    pool(800,0,1100,1000,'pe-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub pe-sub">On ne les remercie plus. On ne les regarde plus. On les suppose solides.</p><h2 class="line pe-line" style="font-size:62px">Le contraste fait le reste.</h2></div></div>';
+  const q=Q(r);this.cam=q('.pe-cam');this.st=W.prep(r);this.boil=q('.pe-boil');this.w=q('.pe-w');this.h=Array.from({length:12},(_,i)=>q('.pe-h'+i));this.n1=q('.pe-n1');this.n2=q('.pe-n2');this.sub=q('.pe-sub');this.line=split(q('.pe-line'));this.pool=q('.pe-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.w,t,.2,.8);fade(this.n1,t,P(2),.5,0);this.h.forEach((h,i)=>show(h,t,P(5)+i*.12,.3));fade(this.n2,t,P(5)+.6,.5,0);
+  fade(this.sub,t,P(1),.6);wordsIn(this.line,t,P(6),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 08 — Une heure pour la peur, quatorze mois pour l'ego.
+sc('duree',['08'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam du-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('du')+'<g class="du-boil">'+
+    '<g class="du-a">'+W.dial('du-d',1160,460,130)+TXT('',1160,660,34,'la peur : 1 heure','var(--main)')+'</g><g class="du-b">'+W.calendar('',1600,460,.85,'14','mois','')+TXT('',1600,660,34,'l’ego : 14 mois','var(--accent)')+'</g></g></svg>'+
+    note('du-n',1220,760,'la valorisation désarme la vigilance',';color:var(--sage);font-size:44px')+'</div>'+pool(800,0,1100,1000,'du-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub du-sub">La peur réveille la vigilance.</p><h2 class="line du-line" style="font-size:58px;color:var(--sage)">Douter du récit, ce serait douter de sa propre valeur.</h2></div></div>';
+  const q=Q(r);this.r=r;this.cam=q('.du-cam');this.boil=q('.du-boil');this.a=q('.du-a');this.b=q('.du-b');this.n=q('.du-n');this.sub=q('.du-sub');this.line=split(q('.du-line'));this.pool=q('.du-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1380,480);W.boil(this.boil,t);show(this.a,t,P(0),.5);const m=lerp(0,60,seg(t,P(0),P(1)));W.hands(this.r,'du-d',1160,460,9+m/60,m%60);show(this.b,t,P(1),.5);fade(this.n,t,P(3),.5,0);
+  fade(this.sub,t,P(2),.6);wordsIn(this.line,t,P(3),.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 09 — Les proches qui alertent : l'effet inverse.
+sc('proches',['09'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam pr-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('pr')+'<g class="pr-boil">'+W.ground(930,980,1820,0)+W.figure('pr-a',1120,926,.95,false)+W.woman('pr-b',1260,926,.9,false)+
+    '<g class="pr-al"><path d="M1190 300 L1250 400 H1130 Z" style="fill:var(--accent)"/>'+TXT('',1190,392,56,'!','var(--ground)','middle','Fraunces,Georgia,serif')+'</g>'+W.woman('pr-w',1640,926,1.05,true)+lamp('pr-l',1640,180)+beam('pr-be',1640,200,420,720)+'</g></svg>'+
+    note('pr-n',1500,320,'l’image qu’on lui a offerte',';color:var(--accent);font-size:42px')+'</div>'+pool(800,0,1100,1000,'pr-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub pr-sub">Les proches qui alertent obtiennent souvent l’effet inverse.</p><h2 class="line pr-line" style="font-size:56px">Ils lui demandent de renoncer à l’image d’elle-même qu’on vient de lui offrir.</h2></div></div>';
+  const q=Q(r);this.cam=q('.pr-cam');this.st=W.prep(r);this.boil=q('.pr-boil');this.a=q('.pr-a');this.b=q('.pr-b');this.al=q('.pr-al');this.w=q('.pr-w');this.be=q('.pr-be');this.n=q('.pr-n');this.sub=q('.pr-sub');this.line=split(q('.pr-line'));this.pool=q('.pr-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.w,t,.1,.6);this.be.style.opacity=.25*eo(seg(t,.4,1.2));show(this.a,t,P(0)+.5,.5);show(this.b,t,P(0)+.9,.5);show(this.al,t,P(0)+1.6,.4);fade(this.n,t,P(1)+1,.5,0);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.07);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 10 — Le scénario : la présence, le secret, l'épreuve.
+sc('scenario',['10'],function(r){
+  const S=['la présence','le secret','l’épreuve'];
+  r.innerHTML='<div class="ground"><div class="cam sc-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('sc')+'<g class="sc-boil">'+'<path class="ink" d="M1000 520 H1800"/>'+
+    S.map((s,i)=>'<g class="sc-s'+i+'"><circle cx="'+(1080+i*320)+'" cy="520" r="46" style="fill:'+(i===2?'var(--accent)':'var(--paper2)')+';stroke:var(--main);stroke-width:4"/>'+TXT('',1080+i*320,536,40,String(i+1),i===2?'var(--ground)':'var(--main)','middle','Fraunces,Georgia,serif')+TXT('',1080+i*320,620,34,s,'var(--main)')+'</g>').join('')+
+    '<g class="sc-coin"><circle cx="1720" cy="760" r="44" style="fill:var(--accent)"/>'+TXT('',1720,776,46,'€','var(--ground)','middle','Fraunces,Georgia,serif')+'</g></g></svg>'+
+    note('sc-n1',1300,670,'« personne ne comprendrait »',G+';font-size:38px')+note('sc-n2',1500,820,'c’est elle qui propose',';color:var(--accent);font-size:42px')+'</div>'+
+    pool(800,0,1100,1000,'sc-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="hand sc-h">Le scénario revient souvent.</p><h2 class="line sc-line" style="font-size:58px">L’argent n’est pas demandé. C’est la victime qui le propose… pour prouver quelque chose.</h2></div></div>';
+  const q=Q(r);this.cam=q('.sc-cam');this.boil=q('.sc-boil');this.s=[0,1,2].map(i=>q('.sc-s'+i));this.coin=q('.sc-coin');this.n1=q('.sc-n1');this.n2=q('.sc-n2');this.h=q('.sc-h');this.line=split(q('.sc-line'));this.pool=q('.sc-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,560);W.boil(this.boil,t);show(this.boil,t,.1,.4);[1,2,4].forEach((k,i)=>show(this.s[i],t,P(k),.4));fade(this.n1,t,P(2)+.6,.4,0);show(this.coin,t,P(5),.5);fade(this.n2,t,P(5)+.4,.5,0);
+  fade(this.h,t,P(0),.5);wordsIn(this.line,t,P(4),.07);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 11 — Décodage (sauge) : la vraie prévention.
+sc('prevention',['11'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam pv-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('pv')+'<g class="pv-boil">'+
+    '<g transform="rotate(-3 1380 420)"><rect x="1080" y="260" width="600" height="320" rx="8" style="fill:var(--paper2);stroke:var(--main);stroke-width:3"/>'+TXT('',1380,380,40,'ATTENTION','var(--main)','middle','Fraunces,Georgia,serif')+TXT('',1380,450,34,'aux faux profils','var(--main)')+'</g>'+
+    '<path class="pv-x" d="M1090 570 L1670 270" style="stroke:var(--accent);stroke-width:8;stroke-linecap:round"/></g></svg>'+
+    note('pv-n',1100,660,'manquer de reconnaissance nous rend vulnérables',';color:var(--sage);font-size:46px;width:640px')+'</div>'+
+    pool(800,0,1100,1000,'pv-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub pv-sub">Personne ne se croit assez naïf pour tomber dans le piège.</p><h2 class="line pv-line" style="font-size:62px;color:var(--sage)">Et cela n’a rien de honteux.</h2></div></div>';
+  const q=Q(r);this.cam=q('.pv-cam');this.boil=q('.pv-boil');this.x=q('.pv-x');this.n=q('.pv-n');this.sub=q('.pv-sub');this.line=split(q('.pv-line'));this.pool=q('.pv-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1380,460);W.boil(this.boil,t);show(this.boil,t,.1,.5);show(this.x,t,P(0)+2.5,.4);fade(this.n,t,P(1)+1,.6,0);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(2),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 12 — La fin : continuer de regarder les gens. Entrelien.
+sc('fin',['12'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam fn-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('fn')+'<g class="fn-boil">'+W.ground(900,1150,1820,0)+W.figure('fn-m',1340,896,.95,false)+W.woman('fn-w',1620,896,.95,true)+
+    '<path class="fn-look" d="M1380 520 Q1480 470 1580 520" style="fill:none;stroke:var(--accent);stroke-width:4;stroke-dasharray:8 8"/></g></svg></div>'+
+    pool(1000,150,800,700,'fn-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:200px;width:800px"><p class="hand fn-a">La meilleure prévention n’est peut-être pas une affiche.</p><h2 class="line fn-line" style="font-size:64px">Continuer de regarder les gens.</h2></div>'+
+    '<div class="words" style="left:260px;bottom:140px;width:900px;gap:8px"><p class="line fn-name" style="font-size:124px;font-weight:500">Entrelien</p><p class="sub fn-tag">Les Carnets de l’Entremetteur</p></div></div>';
+  const q=Q(r);this.cam=q('.fn-cam');this.st=W.prep(r);this.boil=q('.fn-boil');this.m=q('.fn-m');this.w=q('.fn-w');this.look=q('.fn-look');this.a=q('.fn-a');this.line=split(q('.fn-line'));this.name=q('.fn-name');this.tag=q('.fn-tag');this.pool=q('.fn-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1.03,1,1480,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.m,t,.2,.7);show(this.w,t,.4,.7);show(this.look,t,P(1),.6);
+  fade(this.a,t,P(0),.6);wordsIn(this.line,t,P(1),.1);fade(this.name,t,P(2)+.2,.8,20);fade(this.tag,t,P(2)+.7,.6);this.pool.style.opacity=.75+.1*Math.sin(t)});
+
+startFilm();
+</script></body></html>

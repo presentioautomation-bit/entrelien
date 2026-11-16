@@ -1,0 +1,22 @@
+{
+  "numero": "5",
+  "titre": "Trouver l'amour en 48 heures",
+  "source": "https://entrelien.fr/carnets/pourquoi-certains-celibataires-veulent-ils-trouver-l-amour-en-48-heures",
+  "mood": "warm",
+  "hush": ["06"],
+  "gaps": {"01": 0.6, "06": 1.6},
+  "blocks": {
+    "01": "Des années de célibat. Puis une nouvelle application, un nouveau profil, quelques photos. Et à peine deux jours plus tard, la même question : « Alors… c'est pour quand ? »",
+    "02": "Carnet numéro cinq. Pourquoi certains célibataires veulent-ils trouver l'amour en quarante-huit heures ?",
+    "03": "C'est une scène que je vois souvent. Quelqu'un, célibataire depuis longtemps, recommence à chercher. Et ce nouveau départ porte un espoir immense : cette fois, ce sera la bonne. Le problème, c'est quand cet espoir devient une attente immédiate.",
+    "04": "Pourtant, une rencontre n'est pas une commande passée sur Internet. Il faut qu'une autre personne soit là. Qu'elle soit intéressée en retour. Que les échanges fonctionnent. Que l'on finisse par se voir. Tout cela demande du temps… et une part d'incertitude.",
+    "05": "Et puis il y a autre chose. J'ai discuté récemment avec une personne qui savait très précisément ce qu'elle ne pouvait pas accepter chez un homme. Elle me l'a énuméré.",
+    "06": "Pas chauve. Pas de bridge. Pas certains travaux dentaires. Pas ceci. Pas cela.",
+    "07": "Pris un par un, aucun de ces critères n'est choquant. Nous avons tous des préférences. Mais quand ils s'accumulent, la question change. Ce n'est plus : qui est-ce que je cherche ? C'est : est-ce que je laisse encore une place à une personne réelle ?",
+    "08": "Car une personne réelle n'est jamais une liste. Elle peut avoir de beaux yeux… et moins de cheveux que prévu. Être drôle, attentionnée, brillante… et avoir un bridge.",
+    "09": "Après plusieurs échecs, on se dit souvent que les applications ne fonctionnent pas. C'est parfois vrai. Mais changer d'application ne change pas la façon dont on regarde les autres. Les mêmes critères, les mêmes refus… donnent souvent les mêmes résultats.",
+    "10": "Et l'impatience ajoute sa pression. Pourquoi personne ne m'a écrit ? Pourquoi ça ne va pas plus vite ? La recherche devient un tableau de bord qu'on surveille sans cesse. À force de surveiller le résultat, on oublie la rencontre.",
+    "11": "La douceur, l'humour, la fiabilité, la générosité… ne se voient presque jamais dans les premières secondes d'un profil. Il faut souvent rencontrer quelqu'un pour les découvrir.",
+    "12": "La vraie question n'est peut-être pas de rencontrer quelqu'un plus vite. C'est de laisser assez de temps à quelqu'un… pour nous surprendre. C'était un Carnet de l'Entremetteur."
+  }
+}

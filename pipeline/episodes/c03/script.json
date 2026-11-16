@@ -1,0 +1,22 @@
+{
+  "numero": "3",
+  "titre": "Les applications de rencontre fabriquent-elles des célibataires éternels ?",
+  "source": "https://entrelien.fr/carnets/applications-fabriquent-elles-des-celibataires-eternels",
+  "mood": "dusk",
+  "hush": ["06"],
+  "gaps": {"01": 0.6, "06": 1.6},
+  "blocks": {
+    "01": "On l'entend partout : une application qui vit de vos abonnements n'a aucun intérêt à ce que vous trouviez l'amour. L'argument est séduisant. Il désigne un coupable. Mais il oublie l'essentiel.",
+    "02": "Carnet numéro trois. Les applications de rencontre fabriquent-elles des célibataires éternels ?",
+    "03": "Ce que l'argument a de juste, d'abord. Une application mesure des connexions, des messages, des retours quotidiens. Aucun tableau de bord ne compte les couples qui sont partis vivre leur vie ailleurs. Ils ne préviennent pas en partant.",
+    "04": "Et certaines mécaniques viennent du jeu vidéo, pas de l'entremise. La mise en avant payante. La limite quotidienne. La notification qui arrive à l'heure creuse… Et chaque soir, une petite dose d'espoir renouvelée.",
+    "05": "Mais une application où personne ne rencontre personne finit par se vider. Et le célibat prolongé existait bien avant elles. Alors non, je ne crois pas qu'elles fabriquent des célibataires éternels. Je crois qu'elles fabriquent autre chose.",
+    "06": "La conviction… qu'il reste toujours quelqu'un d'autre à découvrir.",
+    "07": "Cette conviction n'empêche pas de rencontrer. Elle empêche de conclure. Le problème n'est plus l'accès aux autres : il est abondant. Le problème, c'est l'arrêt.",
+    "08": "Car choisir, c'est renoncer. Et une interface qui vous montre en permanence tout ce qui reste disponible rend le renoncement très coûteux. Même quand la personne en face vous convient parfaitement.",
+    "09": "Certaines personnes s'en servent très bien. Elles y passent peu de temps, proposent vite une rencontre… et quittent l'application dès que quelque chose commence. Elles ne sont pas plus malines. Elles ont juste décidé que l'outil ne serait pas un lieu de séjour.",
+    "10": "Trois habitudes changent tout. Fixer un délai : une conversation qui n'aboutit pas à un rendez-vous en dix jours deviendra une correspondance confortable. Limiter le nombre : trois conversations suivies valent mieux que vingt entamées.",
+    "11": "Et désinstaller pendant qu'on essaie. Continuer en parallèle, c'est se dire à soi-même que rien n'a vraiment commencé.",
+    "12": "Nous demandons aujourd'hui à une seule personne d'être tout à la fois. Les applications n'ont pas créé cette exigence. Elles nous en offrent seulement le catalogue. C'était un Carnet de l'Entremetteur."
+  }
+}

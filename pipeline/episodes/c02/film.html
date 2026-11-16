@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"></head>
+<body><div id="stage"></div>
+<script src="file:///home/claude/prod/lib/engine.js"></script>
+<script src="timing.js"></script>
+<script>
+// Carnet n°2 — « Pourquoi nous sommes plus exigeants avec les autres qu'avec nous-mêmes »
+// Fil rouge : les deux alliances brisées (ocre) ; le dossier complet contre l'étiquette.
+const Q=r=>s=>r.querySelector(s);
+const G='color:var(--second)';
+const ring=(x,y,r,col)=>'<g><path d="M'+(x-r)+' '+y+' A'+r+' '+r+' 0 0 1 '+(x+r*.6)+' '+(y-r*.8)+'" style="fill:none;stroke:'+col+';stroke-width:12;stroke-linecap:round"/><path d="M'+(x+r*.85)+' '+(y-r*.45)+' A'+r+' '+r+' 0 0 1 '+(x-r*.9)+' '+(y+r*.4)+'" style="fill:none;stroke:'+col+';stroke-width:12;stroke-linecap:round"/></g>';
+const label=(cls,x,y,txt,col)=>'<g class="'+cls+'" transform="translate('+x+' '+y+')"><path d="M-190 -40 H150 L190 0 L150 40 H-190 Z" style="fill:var(--paper2);stroke:'+(col||'var(--main)')+';stroke-width:3"/><circle cx="-166" cy="0" r="8" style="fill:none;stroke:var(--main);stroke-width:3"/>'+TXT('',5,11,30,txt,col||'var(--main)')+'</g>';
+
+// 01 — Accroche, nuit : « Je ne veux pas de quelqu'un qui a divorcé deux fois. »
+sc('accroche',['01'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam ac-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="ac-boil">'+W.moon('ac-moon',1760,180,48)+'<path class="pencil" d="M1000 930 Q1400 918 1880 930"/>'+W.figure('ac-m',1280,926,1.1,false,'var(--nightlift)')+
+    '<g class="ac-l">'+label('',1600,520,'divorcé deux fois','var(--ground)')+'<path d="M1420 550 L1780 490" style="stroke:var(--accent);stroke-width:7;stroke-linecap:round"/></g></g></svg></div>'+pool(1100,180,700,760,'ac-pool')+
+    '<div class="words on-night" style="left:160px;top:250px;width:860px"><p class="sub ac-sub">« Je ne veux pas rencontrer quelqu’un qui a divorcé deux fois. »</p><h1 class="line ac-line" style="font-size:68px">Et il y avait un détail qu’elle avait oublié.</h1></div></div>';
+  const q=Q(r);this.cam=q('.ac-cam');this.boil=q('.ac-boil');this.m=q('.ac-m');this.moon=q('.ac-moon');this.l=q('.ac-l');this.sub=q('.ac-sub');this.line=split(q('.ac-line'));this.pool=q('.ac-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.05,1400,600);W.boil(this.boil,t);show(this.m,t,.1,.8);show(this.moon,t,.4,1.2);show(this.l,t,P(0)+2.2,.5);
+  fade(this.sub,t,P(0),.7);wordsIn(this.line,t,P(2),.1);this.pool.style.opacity=(.3+.05*Math.sin(t*1.2))*eo(seg(t,.4,1.6))},{night:true});
+
+// 02 — Titre : la loupe sur l'étiquette.
+sc('titre',['02'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ti-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ti')+'<g class="ti-boil">'+label('ti-l',1420,560,'l’autre')+
+    '<g class="ti-g"><circle cx="0" cy="0" r="120" style="fill:rgba(255,255,255,.25);stroke:var(--main);stroke-width:8"/><path d="M85 85 L190 190" style="stroke:var(--main);stroke-width:22;stroke-linecap:round"/></g></g></svg></div>'+
+    pool(900,100,1100,900,'ti-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:280px;width:760px"><p class="hand ti-num">Carnet n°2</p><h1 class="line ti-line" style="font-size:66px">Pourquoi nous sommes plus exigeants avec les autres qu’avec nous-mêmes</h1></div></div>';
+  const q=Q(r);this.cam=q('.ti-cam');this.boil=q('.ti-boil');this.g=q('.ti-g');this.num=q('.ti-num');this.line=split(q('.ti-line'));this.pool=q('.ti-pool');
+},function(t){push(this.cam,t,this.dur,1,1.035,1440,560);W.boil(this.boil,t);show(this.boil,t,.1,.6);this.g.setAttribute('transform','translate('+(1420+60*Math.sin(t*.8)).toFixed(0)+' '+(540+20*Math.cos(t))+')');
+  fade(this.num,t,this.P(0),.5);wordsIn(this.line,t,this.P(0)+1,.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 03 — Elle ne mentait pas ; puis son propre parcours.
+sc('parcours',['03'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam pa-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('pa')+'<g class="pa-boil">'+W.ground(930,980,1800,0)+W.figure('pa-m',1220,926,1.05,false)+W.bub('pa-b',1320,220,440,130,true)+
+    '<g class="pa-nb" transform="translate(1600 640) rotate(4)"><rect x="-130" y="-170" width="260" height="340" rx="10" style="fill:var(--paper2)"/><rect class="ink-thin" x="-130" y="-170" width="260" height="340" rx="10"/>'+TXT('',0,-120,30,'son parcours','var(--second)')+'<path class="pencil" d="M-90 -60 H90 M-90 -10 H90 M-90 40 H60 M-90 90 H80"/></g></g></svg>'+
+    W.bubText('pa-bt',1320,220,440,'ce qu’elle ne veut plus vivre',40)+'</div>'+pool(800,0,1100,1000,'pa-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="sub pa-sub">Elle ne mentait pas. Elle ne se moquait pas de moi.</p><h2 class="line pa-line" style="font-size:60px">Puis elle m’a parlé de son propre parcours.</h2></div></div>';
+  const q=Q(r);this.cam=q('.pa-cam');this.st=W.prep(r);this.boil=q('.pa-boil');this.m=q('.pa-m');this.b=q('.pa-b');this.bt=q('.pa-bt');this.nb=q('.pa-nb');this.sub=q('.pa-sub');this.line=split(q('.pa-line'));this.pool=q('.pa-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.m,t,.2,.7);const b=eo(seg(t,P(2),P(2)+.5));this.b.style.opacity=b;this.bt.style.opacity=b;show(this.nb,t,P(3)+1,.6);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(3),.09);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 04 — La bascule, nuit : « Elle avait divorcé… deux fois. »
+sc('deux-fois',['04'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam df-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="df-boil"><g class="df-r1">'+ring(1340,520,110,'var(--accent)')+'</g><g class="df-r2">'+ring(1600,560,110,'var(--accent)')+'</g></g></svg></div>'+pool(1150,200,600,700,'df-pool')+
+    '<div class="words on-night" style="left:160px;top:330px;width:820px"><p class="hand df-h">Elle avait divorcé…</p><h2 class="line df-line" style="font-size:96px">deux fois.</h2></div></div>';
+  const q=Q(r);this.cam=q('.df-cam');this.boil=q('.df-boil');this.r1=q('.df-r1');this.r2=q('.df-r2');this.h=q('.df-h');this.line=split(q('.df-line'));this.pool=q('.df-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.06,1460,540);W.boil(this.boil,t);show(this.r1,t,P(0)+.4,.5);show(this.r2,t,P(1),.4);
+  fade(this.h,t,P(0),.5);wordsIn(this.line,t,P(1),.14);this.pool.style.opacity=(.2+.45*eo(seg(t,P(1),P(1)+1)))*(.92+.08*Math.sin(t*1.3))},{night:true,lead:1.5});
+
+// 05 — Chez elle, des raisons ; chez l'autre, une inquiétude.
+sc('raisons',['05'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ra-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ra')+'<g class="ra-boil">'+
+    '<g class="ra-a"><rect x="1000" y="260" width="380" height="460" rx="16" style="fill:var(--paper2)"/><rect class="ink-thin" x="1000" y="260" width="380" height="460" rx="16"/>'+TXT('',1190,320,32,'son cas','var(--sage)')+
+    [0,1,2,3,4,5,6].map(i=>'<path class="pencil" d="M1040 '+(380+i*45)+' H'+(1340-(i%3)*40)+'"/>').join('')+TXT('',1190,690,30,'des raisons','var(--sage)')+'</g>'+
+    '<g class="ra-b">'+label('',1610,480,'divorcé deux fois')+'<g transform="translate(1600 620)"><path d="M0 60 V-60" class="ink"/><path d="M0 -60 L80 -40 L0 -20 Z" style="fill:var(--accent)"/></g>'+TXT('',1610,720,30,'une inquiétude','var(--accent)')+'</g></g></svg></div>'+
+    pool(800,0,1100,1000,'ra-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="sub ra-sub">Ce n’est pas de la mauvaise foi.</p><h2 class="line ra-line" style="font-size:62px">C’est un mécanisme très humain.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ra-cam');this.boil=q('.ra-boil');this.a=q('.ra-a');this.b=q('.ra-b');this.sub=q('.ra-sub');this.line=split(q('.ra-line'));this.pool=q('.ra-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,500);W.boil(this.boil,t);show(this.a,t,P(0),.5);show(this.b,t,P(1),.5);fade(this.sub,t,P(2),.6);wordsIn(this.line,t,P(3),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 06 — Moi, les circonstances ; lui, son caractère (le train).
+sc('train',['06'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam tr-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('tr')+'<g class="tr-boil">'+
+    '<g class="tr-a"><path class="ink-thin" d="M960 660 H1360"/><rect x="1000" y="520" width="240" height="130" rx="18" style="fill:var(--paper2);stroke:var(--main);stroke-width:4"/><rect x="1030" y="545" width="60" height="45" rx="6" class="ink-thin"/><rect x="1110" y="545" width="60" height="45" rx="6" class="ink-thin"/><circle cx="1050" cy="660" r="16" style="fill:var(--main)"/><circle cx="1190" cy="660" r="16" style="fill:var(--main)"/>'+
+    '<path d="M1290 560 V660 M1260 580 H1360" style="stroke:var(--accent);stroke-width:8;stroke-linecap:round"/>'+TXT('',1170,740,30,'moi : le train était bloqué','var(--sage)')+'</g>'+
+    '<g class="tr-b">'+W.figure('',1640,700,.75,false)+TXT('',1640,780,30,'lui : négligent','var(--accent)')+W.dial('tr-d',1760,360,70)+'</g></g></svg></div>'+
+    pool(800,0,1100,1000,'tr-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:240px;width:600px"><p class="sub tr-sub">On explique ses propres comportements par les circonstances…</p><h2 class="line tr-line" style="font-size:60px">et ceux des autres par leur caractère.</h2></div></div>';
+  const q=Q(r);this.cam=q('.tr-cam');this.boil=q('.tr-boil');this.a=q('.tr-a');this.b=q('.tr-b');this.sub=q('.tr-sub');this.line=split(q('.tr-line'));this.pool=q('.tr-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,560);W.boil(this.boil,t);show(this.a,t,P(2),.5);show(this.b,t,P(3),.5);fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 07 — Une biographie contre une étiquette.
+sc('dossier',['07'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam do-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('do')+'<g class="do-boil">'+
+    '<g class="do-a">'+[4,3,2,1,0].map(i=>'<rect x="'+(1020+i*8)+'" y="'+(300-i*8)+'" width="320" height="420" rx="10" style="fill:var(--paper2);stroke:var(--main);stroke-width:3"/>').join('')+TXT('',1180,380,34,'mon dossier','var(--sage)')+
+    '<path class="pencil" d="M1060 440 H1300 M1060 480 H1280 M1060 520 H1300 M1060 560 H1240 M1060 600 H1290 M1060 640 H1260"/></g>'+label('do-b',1640,500,'une ligne de profil')+
+    '<g class="do-sc"><path class="ink" d="M1400 900 V780 M1300 900 H1500"/><path class="do-beam ink" d="M1200 780 H1600"/></g></g></svg>'+note('do-n',1520,600,'l’étiquette perd toujours',';color:var(--accent);font-size:44px')+'</div>'+
+    pool(800,0,1100,1000,'do-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub do-sub">Ce n’est pas deux personnes qu’on compare.</p><h2 class="line do-line" style="font-size:62px">C’est une biographie… contre une étiquette.</h2></div></div>';
+  const q=Q(r);this.cam=q('.do-cam');this.boil=q('.do-boil');this.a=q('.do-a');this.b=q('.do-b');this.sc=q('.do-sc');this.beam=q('.do-beam');this.n=q('.do-n');this.sub=q('.do-sub');this.line=split(q('.do-line'));this.pool=q('.do-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,520);W.boil(this.boil,t);show(this.a,t,P(0)+.4,.5);show(this.b,t,P(1),.5);show(this.sc,t,P(3),.5);this.beam.setAttribute('transform','rotate('+lerp(0,-8,eio(seg(t,P(4),P(5)))).toFixed(1)+' 1400 780)');fade(this.n,t,P(5),.5,0);
+  fade(this.sub,t,P(2),.6);wordsIn(this.line,t,P(3),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 08 — Les filtres : une envie floue devient une règle.
+sc('filtres',['08'],function(r){
+  const F=['âge','taille','distance','situation'];
+  r.innerHTML='<div class="ground"><div class="cam fi2-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('fl')+'<g class="fl-boil">'+
+    '<rect x="1020" y="230" width="700" height="520" rx="16" style="fill:var(--paper2)"/><rect class="ink-thin" x="1020" y="230" width="700" height="520" rx="16"/>'+TXT('',1370,290,32,'filtres','var(--second)')+
+    F.map((f,i)=>'<g class="fl-f'+i+'">'+TXT('',1070,375+i*100,32,f,'var(--main)','start')+'<path d="M1270 365 H1660" transform="translate(0 '+(i*100)+')" style="stroke:var(--rule);stroke-width:8;stroke-linecap:round"/><path class="fl-r'+i+'" d="M1270 365 H1660" transform="translate(0 '+(i*100)+')" style="stroke:var(--accent);stroke-width:8;stroke-linecap:round"/></g>').join('')+'</g></svg>'+
+    note('fl-n',1360,780,'une règle, on la défend',';color:var(--accent);font-size:46px')+'</div>'+pool(800,0,1100,1000,'fl-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="sub fl-sub">Les applications n’ont pas inventé ce mécanisme.</p><h2 class="line fl-line" style="font-size:64px">Elles l’ont industrialisé.</h2></div></div>';
+  const q=Q(r);this.cam=q('.fi2-cam');this.boil=q('.fl-boil');this.f=[0,1,2,3].map(i=>q('.fl-f'+i));this.rr=[0,1,2,3].map(i=>q('.fl-r'+i));this.n=q('.fl-n');this.sub=q('.fl-sub');this.line=split(q('.fl-line'));this.pool=q('.fl-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1370,490);W.boil(this.boil,t);show(this.boil,t,P(1),.5);const a=P(2),b=this.PE(2);
+  this.f.forEach((f,i)=>show(f,t,a+i*(b-a)/5,.4));this.rr.forEach((x,i)=>{const g=eio(seg(t,a+i*(b-a)/5+.4,a+i*(b-a)/5+1.2));x.setAttribute('d','M'+(1270+g*(60+i*30))+' 365 H'+(1660-g*(140+i*20)))});
+  fade(this.n,t,P(3),.5,0);fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 09 — L'exercice (sauge) : mes critères, appliqués à moi.
+sc('exercice',['09'],function(r){
+  const C=['stable','sans bagage','jamais divorcé','toujours patient'];
+  r.innerHTML='<div class="ground"><div class="cam ex-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ex')+'<g class="ex-boil">'+
+    '<rect x="1040" y="230" width="600" height="520" rx="16" style="fill:var(--paper2)"/><rect class="ink-thin" x="1040" y="230" width="600" height="520" rx="16"/>'+TXT('',1340,290,32,'mes critères… pour moi ?','var(--sage)')+
+    W.checklist('ex-k',1090,390,C,false)+C.map((_,i)=>'<g class="ex-m'+i+'">'+(i%2?'<path d="M1094 '+(370+i*100*0.7)+' L1124 '+(400+i*70)+' M1124 '+(370+i*70)+' L1094 '+(400+i*70)+'" style="stroke:var(--accent);stroke-width:6;stroke-linecap:round"/>':'<path d="M1094 '+(386+i*70)+' L1106 '+(400+i*70)+' L1130 '+(368+i*70)+'" style="fill:none;stroke:var(--sage);stroke-width:6;stroke-linecap:round"/>')+'</g>').join('')+'</g></svg>'+
+    note('ex-n',1320,780,'embarrassant… et salutaire',';color:var(--sage);font-size:46px')+'</div>'+pool(800,0,1100,1000,'ex-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="hand ex-h">Un petit exercice.</p><h2 class="line ex-line" style="font-size:58px;color:var(--sage)">Écrire ses critères… puis se demander lesquels on remplirait soi-même.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ex-cam');this.boil=q('.ex-boil');this.k=[0,1,2,3].map(i=>q('.ex-k-i'+i));this.m=[0,1,2,3].map(i=>q('.ex-m'+i));this.n=q('.ex-n');this.h=q('.ex-h');this.line=split(q('.ex-line'));this.pool=q('.ex-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1340,490);W.boil(this.boil,t);show(this.boil,t,P(1),.5);this.k.forEach((k,i)=>show(k,t,P(1)+.3+i*.4,.3));this.m.forEach((m,i)=>show(m,t,P(2)+.8+i*.5,.3));fade(this.n,t,P(3),.5,0);
+  fade(this.h,t,P(0),.5);wordsIn(this.line,t,P(1),.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 10 — L'exigence comme pare-feu.
+sc('pare-feu',['10'],function(r){
+  let br='';for(let row=0;row<6;row++)for(let c=0;c<5;c++){const x=1140+c*100+(row%2?50:0),y=360+row*60;br+='<rect x="'+x+'" y="'+y+'" width="96" height="56" rx="4" style="fill:var(--paper2);stroke:var(--main);stroke-width:2.5"/>'}
+  r.innerHTML='<div class="ground"><div class="cam pf-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('pf')+'<g class="pf-boil">'+W.heart('pf-h',1720,560,1.1)+'<g class="pf-w">'+br+'</g></g></svg>'+
+    note('pf-n',1220,250,'un pare-feu',';color:var(--accent);font-size:64px')+'</div>'+pool(800,0,1100,1000,'pf-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub pf-sub">Des critères impossibles garantissent une chose : on ne sera pas déçu… puisqu’on ne s’engagera pas.</p><h2 class="line pf-line" style="font-size:60px;color:var(--sage)">Ce n’est pas de l’arrogance. C’est une protection.</h2></div></div>';
+  const q=Q(r);this.cam=q('.pf-cam');this.boil=q('.pf-boil');this.h=q('.pf-h');this.w=q('.pf-w');this.n=q('.pf-n');this.sub=q('.pf-sub');this.line=split(q('.pf-line'));this.pool=q('.pf-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,540);W.boil(this.boil,t);show(this.h,t,P(0)+.3,.5);this.w.style.clipPath='inset('+((1-eo(seg(t,P(1),P(2)+1)))*100).toFixed(1)+'% 0 0 0)';fade(this.n,t,P(4),.5,0);
+  fade(this.sub,t,P(1),.6);wordsIn(this.line,t,P(3),.09);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 11 — Les plus indulgents : ceux qui ont été, un jour, un mauvais profil sur le papier.
+sc('indulgents',['11'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam in-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('in')+'<g class="in-boil">'+W.ground(930,980,1800,0)+W.figure('in-m',1240,926,1.05,false)+
+    '<g class="in-c" transform="translate(1580 520) rotate(5)"><rect x="-150" y="-190" width="300" height="380" rx="14" style="fill:var(--paper2);stroke:var(--main);stroke-width:3"/><circle cy="-80" r="50" style="fill:var(--wash2)"/><path d="M-80 30 Q0 -30 80 30" style="fill:var(--wash2)"/><path d="M-100 90 H100 M-100 130 H40" style="stroke:var(--second);stroke-width:4;opacity:.5"/></g>'+
+    '<g class="in-s" transform="translate(1580 520) rotate(-14)"><rect x="-150" y="-40" width="300" height="80" rx="8" style="fill:none;stroke:var(--accent);stroke-width:6"/>'+TXT('',0,14,34,'mauvais profil','var(--accent)')+'</g></g></svg></div>'+
+    pool(800,0,1100,1000,'in-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub in-sub">Les plus indulgents ne sont pas ceux qui ont le moins souffert.</p><h2 class="line in-line" style="font-size:56px">Ce sont ceux qui ont compris qu’eux aussi avaient été, un jour, un mauvais profil sur le papier.</h2></div></div>';
+  const q=Q(r);this.cam=q('.in-cam');this.st=W.prep(r);this.boil=q('.in-boil');this.m=q('.in-m');this.c=q('.in-c');this.s=q('.in-s');this.sub=q('.in-sub');this.line=split(q('.in-line'));this.pool=q('.in-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,560);W.draw(this.st,t);W.boil(this.boil,t);show(this.m,t,.2,.7);show(this.c,t,P(1),.5);show(this.s,t,this.PE(1)-1.2,.4);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.07);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 12 — La fin : la personne, ou le peu que je sais d'elle ? Entrelien.
+sc('fin',['12'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam fn-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('fn')+'<g class="fn-boil">'+W.ground(900,1200,1800,0)+W.figure('fn-m',1500,896,1,false)+label('fn-l',1500,320,'le peu que je sais','var(--accent)')+'</g></svg></div>'+
+    pool(1000,150,800,700,'fn-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:200px;width:800px"><p class="hand fn-a">Est-ce que je refuse cette personne…</p><h2 class="line fn-line" style="font-size:62px">ou est-ce que je refuse le peu que je sais d’elle ?</h2></div>'+
+    '<div class="words" style="left:260px;bottom:140px;width:900px;gap:8px"><p class="line fn-name" style="font-size:124px;font-weight:500">Entrelien</p><p class="sub fn-tag">Les Carnets de l’Entremetteur</p></div></div>';
+  const q=Q(r);this.cam=q('.fn-cam');this.st=W.prep(r);this.boil=q('.fn-boil');this.m=q('.fn-m');this.l=q('.fn-l');this.a=q('.fn-a');this.line=split(q('.fn-line'));this.name=q('.fn-name');this.tag=q('.fn-tag');this.pool=q('.fn-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1.03,1,1480,560);W.draw(this.st,t);W.boil(this.boil,t);show(this.m,t,P(1),.7);show(this.l,t,P(2)+.5,.5);
+  fade(this.a,t,P(1),.6);wordsIn(this.line,t,P(2),.09);fade(this.name,t,P(3)+.2,.8,20);fade(this.tag,t,P(3)+.7,.6);this.pool.style.opacity=.75+.1*Math.sin(t)});
+
+startFilm();
+</script></body></html>

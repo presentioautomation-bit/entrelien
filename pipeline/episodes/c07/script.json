@@ -1,0 +1,22 @@
+{
+  "numero": "7",
+  "titre": "À 65 ans, il se voyait encore comme un homme de 30 ans",
+  "source": "https://entrelien.fr/carnets/a-65-ans-il-se-voyait-encore-comme-un-homme-de-30-ans",
+  "mood": "blue",
+  "hush": ["06"],
+  "gaps": {"01": 0.6, "06": 1.6},
+  "blocks": {
+    "01": "Il avait soixante-cinq ans. Il cherchait une femme de trente ans. Plusieurs agences avaient refusé de l'aider… Et il ne comprenait pas pourquoi. Puis il m'a donné sa raison.",
+    "02": "Carnet numéro sept. À soixante-cinq ans, il se voyait encore comme un homme de trente ans.",
+    "03": "J'ai discuté avec un homme qui avait eu une longue carrière, très structurée, entièrement consacrée à son métier. Sur le plan sentimental, son parcours était tout autre. Une seule relation, quand il était jeune. Puis plus rien, pendant des décennies.",
+    "04": "Sa demande était précise : une femme de trente ans. Trente-cinq, maximum. Il voulait aussi un enfant. Plusieurs agences avaient déjà refusé de l'accompagner. Ce qui le troublait, ce n'était pas le refus. C'était de ne pas le comprendre.",
+    "05": "Il se trouvait bien conservé. Il pensait faire beaucoup plus jeune que son âge. Mais ce n'était pas son vrai argument. Son vrai argument, c'était celui-ci…",
+    "06": "« Je n'ai pas de bagage amoureux. Sentimentalement… j'ai trente ans. »",
+    "07": "Et honnêtement, son raisonnement n'était pas absurde. Il avait beaucoup moins vécu la vie de couple que la plupart des hommes de son âge. Il ne se définissait pas par son âge. Il se définissait par son expérience.",
+    "08": "Mais ne pas avoir vécu de relation, ce n'est pas ne pas avoir vécu. Ces années-là ne disparaissent pas. Elles ont été remplies d'autre chose : un métier, des responsabilités, des habitudes, une façon de voir le monde.",
+    "09": "Et une rencontre ne se fait jamais avec l'image que l'on a de soi. Elle se fait avec l'image que l'autre se construit de nous.",
+    "10": "Il a parfaitement le droit de chercher une femme plus jeune. La vraie question est ailleurs : une femme de trente ans se reconnaîtra-t-elle dans ce projet ? Partagera-t-elle son idée d'un âge sentimental commun ? Rien ne permet de le présumer.",
+    "11": "On peut être très précis sur ce que l'on veut… sans s'être jamais demandé ce que l'autre pourrait vouloir. Un projet d'enfant, une vie à deux, ne dépendent jamais d'une seule personne.",
+    "12": "Dans une rencontre, il ne suffit pas de savoir qui l'on pense être. Il faut aussi accepter de découvrir qui l'autre voit, quand il nous regarde. C'était un Carnet de l'Entremetteur."
+  }
+}

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"></head>
+<body><div id="stage"></div>
+<script src="file:///home/claude/prod/lib/engine.js"></script>
+<script src="timing.js"></script>
+<script>
+// Carnet n°8 — « Vous n'avez pas répondu. Alors j'ai insisté. »
+// Fil rouge : les bulles de messages envoyés, sans réponse ; ocre : le signalement, puis « j'insiste ».
+const Q=r=>s=>r.querySelector(s);
+const G='color:var(--second)';
+// bulle de message (HTML) : côté droit = envoyé
+const msg=(cls,x,y,w,txt,o)=>{o=o||{};return '<div class="'+cls+'" style="position:absolute;left:'+x+'px;top:'+y+'px;width:'+w+'px;padding:12px 18px;border-radius:18px 18px 4px 18px;background:'+(o.bg||'var(--main)')+';color:'+(o.fg||'var(--ground)')+';font-family:Work Sans,sans-serif;font-weight:500;font-size:'+(o.size||26)+'px;line-height:1.25;opacity:0">'+txt+'</div>'};
+const tick=(cls,x,y,txt,col)=>'<p class="note '+cls+'" style="left:'+x+'px;top:'+y+'px;font-size:30px;'+(col?'color:'+col:G)+';opacity:0">'+txt+'</p>';
+
+// 01 — Accroche, nuit : trois messages sans réponse.
+sc('accroche',['01'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam ac-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="ac-boil">'+W.moon('ac-moon',1740,190,52)+W.tel('ac-t',1400,540,1.3,true)+'</g></svg>'+
+    msg('ac-m0',1300,300,230,'Bonjour…',{bg:'var(--ground)',fg:'var(--main)'})+msg('ac-m1',1300,410,230,'Vous avez vu mon message ?',{bg:'var(--ground)',fg:'var(--main)'})+msg('ac-m2',1300,550,230,'…',{bg:'var(--accent)',fg:'var(--night)',size:40})+
+    tick('ac-s0',1290,360,'vu ?','var(--ground)')+'</div>'+pool(1150,200,600,700,'ac-pool')+
+    '<div class="words on-night" style="left:160px;top:260px;width:860px"><p class="sub ac-sub">Un message. Pas de réponse. Un deuxième. Toujours rien.</p><h1 class="line ac-line" style="font-size:66px">Après le troisième… il a fait quelque chose que je n’avais pas vu venir.</h1></div></div>';
+  const q=Q(r);this.cam=q('.ac-cam');this.boil=q('.ac-boil');this.t=q('.ac-t');this.moon=q('.ac-moon');this.m=[0,1,2].map(i=>q('.ac-m'+i));this.sub=q('.ac-sub');this.line=split(q('.ac-line'));this.pool=q('.ac-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.05,1400,540);W.boil(this.boil,t);show(this.t,t,.1,.8);show(this.moon,t,.4,1.2);
+  fade(this.m[0],t,P(0),.4,10);fade(this.m[1],t,P(2),.4,10);fade(this.m[2],t,P(4),.4,10);fade(this.sub,t,P(0),.7);wordsIn(this.line,t,P(4),.1);this.pool.style.opacity=(.3+.05*Math.sin(t*1.2))*eo(seg(t,.4,1.6))},{night:true});
+
+// 02 — Titre : le téléphone et les trois points qui n'arrivent jamais.
+sc('titre',['02'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ti-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ti')+'<g class="ti-boil">'+W.tel('ti-t',1440,540,1.1,false,
+    '<g class="ti-dots"><rect x="-70" y="-30" width="140" height="60" rx="30" style="fill:var(--paper2);stroke:var(--second);stroke-width:2"/>'+[0,1,2].map(i=>'<circle class="ti-d'+i+'" cx="'+(-34+i*34)+'" cy="0" r="10" style="fill:var(--second)"/>').join('')+'</g>')+'</g></svg></div>'+
+    pool(900,100,1100,900,'ti-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:320px;width:800px"><p class="hand ti-num">Carnet n°8</p><h1 class="line ti-line" style="font-size:78px">Vous n’avez pas répondu. Alors j’ai insisté.</h1></div></div>';
+  const q=Q(r);this.cam=q('.ti-cam');this.boil=q('.ti-boil');this.t=q('.ti-t');this.d=[0,1,2].map(i=>q('.ti-d'+i));this.num=q('.ti-num');this.line=split(q('.ti-line'));this.pool=q('.ti-pool');
+},function(t){push(this.cam,t,this.dur,1,1.035,1440,560);W.boil(this.boil,t);show(this.t,t,.1,.7);this.d.forEach((d,i)=>d.style.opacity=.3+.7*Math.max(0,Math.sin(t*5-i*.9)));
+  fade(this.num,t,this.P(0),.5);wordsIn(this.line,t,this.P(0)+1.1,.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 03 — Un homme réservé ; un profil apparaît.
+sc('profil',['03'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam pr-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('pr')+'<g class="pr-boil">'+W.ground(930,900,1800,0)+W.figure('pr-m',1080,926,1.05,false)+
+    '<g class="pr-card"><rect x="1360" y="250" width="380" height="500" rx="22" style="fill:var(--paper2)"/><rect class="ink" x="1360" y="250" width="380" height="500" rx="22"/>'+
+    '<g transform="translate(1550 600) scale(.75)"><path d="M-70 0 L-34 -150 Q-50 -170 -52 -250 Q-54 -300 -18 -318 L18 -318 Q54 -300 52 -250 Q50 -170 34 -150 L70 0 Z" style="fill:var(--wash)"/><path d="M-40 -392 Q0 -420 40 -392 Q52 -350 44 -320 L-44 -320 Q-52 -350 -40 -392 Z" style="fill:var(--wash)"/><circle cy="-360" r="35" style="fill:var(--wash)"/></g>'+
+    '<path class="pencil" d="M1400 660 H1700 M1400 700 H1620"/><circle cx="1700" cy="290" r="10" style="fill:var(--sage)"/></g>'+W.heart('pr-h',1250,420,.7)+'</g></svg>'+note('pr-n',1170,500,'timide',G+';font-size:44px')+'</div>'+
+    pool(800,0,1100,1000,'pr-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:560px"><p class="sub pr-sub">Un homme plutôt réservé, assez timide.</p><h2 class="line pr-line" style="font-size:64px">Un jour, une femme apparaît. Elle lui plaît.</h2><p class="hand pr-hand">Il lui écrit.</p></div></div>';
+  const q=Q(r);this.cam=q('.pr-cam');this.st=W.prep(r);this.boil=q('.pr-boil');this.m=q('.pr-m');this.card=q('.pr-card');this.h=q('.pr-h');this.n=q('.pr-n');this.sub=q('.pr-sub');this.line=split(q('.pr-line'));this.hand=q('.pr-hand');this.pool=q('.pr-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1300,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.m,t,.2,.8);fade(this.n,t,P(0)+1.2,.5,0);
+  fade(this.card,t,P(2),.6,20);show(this.h,t,P(3),.5);fade(this.sub,t,P(0),.7);wordsIn(this.line,t,P(2),.1);fade(this.hand,t,P(4),.5);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 04 — Premier message, deuxième message : toujours rien.
+sc('messages',['04'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam me-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('me')+'<g class="me-boil">'+W.tel('me-t',1420,540,1.3,false)+'</g></svg>'+
+    msg('me-m0',1300,330,250,'Bonjour, je me permets de vous écrire…')+tick('me-s0',1330,450,'pas de réponse')+
+    msg('me-m1',1300,540,250,'Vous avez bien reçu le premier ?')+tick('me-s1',1330,640,'toujours rien')+
+    W.dial('me-d',1720,860,90)+'</div>'+pool(800,0,1100,1000,'me-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:270px;width:600px"><h2 class="line me-l0" style="font-size:66px">Premier message.</h2><h2 class="line me-l1" style="font-size:66px">Deuxième message.</h2><p class="hand me-hand" style="color:var(--second)">Toujours rien.</p></div></div>';
+  const q=Q(r);this.r=r;this.cam=q('.me-cam');this.boil=q('.me-boil');this.t=q('.me-t');this.m0=q('.me-m0');this.s0=q('.me-s0');this.m1=q('.me-m1');this.s1=q('.me-s1');this.d=q('.me-d');this.l0=q('.me-l0');this.l1=q('.me-l1');this.hand=q('.me-hand');this.pool=q('.me-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1420,540);W.boil(this.boil,t);show(this.t,t,.1,.6);fade(this.m0,t,P(0)+.4,.4,10);fade(this.s0,t,P(1),.4,0);
+  show(this.d,t,P(2),.4);const m=lerp(0,720,eio(seg(t,P(2),P(3))));W.hands(this.r,'me-d',1720,860,m/60,m%60);
+  fade(this.m1,t,P(3)+.3,.4,10);fade(this.s1,t,P(4),.4,0);fade(this.l0,t,P(0),.5);fade(this.l1,t,P(3),.5);fade(this.hand,t,P(4),.5);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 05-06 — La bascule, nuit : le troisième message… puis le signalement.
+sc('signal',['05','06'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam si-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="si-boil">'+W.moon('si-moon',1760,190,50)+W.tel('si-t',1420,540,1.3,true)+
+    '<g class="si-flag" transform="translate(1420 690)"><circle r="78" style="fill:var(--accent)"/><path d="M-26 44 V-46 M-26 -46 H34 L20 -22 L34 2 H-26" style="fill:none;stroke:var(--night);stroke-width:8;stroke-linejoin:round;stroke-linecap:round"/></g></g></svg>'+
+    msg('si-m',1300,330,250,'Pourquoi vous ne répondez pas ?',{bg:'var(--ground)',fg:'var(--main)'})+'<p class="note si-lab" style="left:1300px;top:790px;width:240px;text-align:center;color:var(--accent);font-size:46px;opacity:0">signalé</p></div>'+
+    pool(1150,200,600,700,'si-pool')+
+    '<div class="words on-night" style="left:160px;top:280px;width:860px"><p class="sub si-sub">Troisième message. Et comme le silence continuait…</p><h2 class="line si-line" style="font-size:82px">il a signalé son profil.</h2></div></div>';
+  const q=Q(r);this.cam=q('.si-cam');this.boil=q('.si-boil');this.t=q('.si-t');this.moon=q('.si-moon');this.m=q('.si-m');this.f=q('.si-flag');this.lab=q('.si-lab');this.sub=q('.si-sub');this.line=split(q('.si-line'));this.pool=q('.si-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.06,1420,560);W.boil(this.boil,t);show(this.t,t,.1,.8);show(this.moon,t,.3,1.2);fade(this.m,t,P(0)+.3,.4,10);
+  const f=eo(seg(t,P(2),P(2)+.5));this.f.style.opacity=f;this.f.setAttribute('transform','translate(1420 690) scale('+lerp(.6,1,f).toFixed(3)+')');fade(this.lab,t,P(2)+.4,.4,0);
+  fade(this.sub,t,P(0),.7);wordsIn(this.line,t,P(2),.12);this.pool.style.opacity=(.2+.45*eo(seg(t,P(2),P(2)+1)))*(.92+.08*Math.sin(t*1.3))},{night:true});
+
+// 07 — L'appel : sa logique, une question de respect.
+sc('appel',['07'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ap-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ap')+'<g class="ap-boil">'+W.ground(930,1000,1800,0)+W.figure('ap-m',1180,926,1.05,false)+
+    W.tel('ap-t',1650,640,.5,false)+'<path class="ap-w ink-thin" d="M1540 600 Q1520 580 1540 560 M1510 620 Q1475 580 1510 540"/>'+W.bub('ap-b',1260,190,560,180,true)+'</g></svg>'+
+    W.bubText('ap-bt',1260,190,560,'« Je lui ai écrit trois fois. Elle ne répond pas. Ce n’est pas normal. »',38)+'</div>'+
+    pool(800,0,1100,1000,'ap-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="hand ap-hand">Je l’ai appelé.</p><h2 class="line ap-line" style="font-size:66px">Pour lui, c’était une question de respect.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ap-cam');this.st=W.prep(r);this.boil=q('.ap-boil');this.m=q('.ap-m');this.t=q('.ap-t');this.w=q('.ap-w');this.b=q('.ap-b');this.bt=q('.ap-bt');this.hand=q('.ap-hand');this.line=split(q('.ap-line'));this.pool=q('.ap-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1340,560);W.draw(this.st,t);W.boil(this.boil,t);show(this.m,t,.2,.8);show(this.t,t,.2,.8);this.w.style.opacity=eo(seg(t,.4,.8))*(.6+.4*Math.sin(t*4));
+  const b=eo(seg(t,P(1),P(1)+.5));this.b.style.opacity=b;this.bt.style.opacity=b;fade(this.hand,t,P(0),.5);wordsIn(this.line,t,P(4));this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 08 — Toutes les hypothèses… sauf une.
+sc('hypotheses',['08'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam hy-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('hy')+'<g class="hy-boil">'+
+    '<rect x="1080" y="230" width="640" height="560" rx="16" style="fill:var(--paper2)"/><rect class="ink-thin" x="1080" y="230" width="640" height="560" rx="16"/>'+TXT('',1400,300,34,'ses hypothèses','var(--second)')+
+    W.checklist('hy-k',1140,400,['elle n’a pas vu le message','un problème de compte','un oubli'],false)+
+    [0,1,2].map(i=>'<path class="hy-c'+i+'" d="M1144 '+(396+i*70)+' L1158 '+(412+i*70)+' L1184 '+(380+i*70)+'" style="fill:none;stroke:var(--sage);stroke-width:6;stroke-linecap:round"/>').join('')+
+    '<g class="hy-last"><rect x="1140" y="624" width="36" height="36" rx="4" style="fill:none;stroke:var(--accent);stroke-width:4"/>'+TXT('',1196,654,36,'elle n’est pas intéressée','var(--accent)','start')+'</g></g></svg>'+
+    '<p class="note hy-q" style="left:1600px;top:560px;font-size:110px;color:var(--accent)">?</p></div>'+pool(800,0,1100,1000,'hy-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub hy-sub">Il avait tout envisagé.</p><h2 class="line hy-line" style="font-size:58px">« Et si elle n’était tout simplement pas intéressée ? »</h2><p class="hand hy-hand" style="color:var(--second)">Il ne comprenait pas.</p></div></div>';
+  const q=Q(r);this.cam=q('.hy-cam');this.boil=q('.hy-boil');this.ki=[0,1,2].map(i=>q('.hy-k-i'+i));this.kc=[0,1,2].map(i=>q('.hy-c'+i));this.last=q('.hy-last');this.qm=q('.hy-q');this.sub=q('.hy-sub');this.line=split(q('.hy-line'));this.hand=q('.hy-hand');this.pool=q('.hy-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,520);W.boil(this.boil,t);[1,2,3].forEach((k,i)=>{show(this.ki[i],t,P(k),.4);show(this.kc[i],t,P(k)+.4,.3)});
+  show(this.last,t,P(4)+1,.6);fade(this.qm,t,P(5),.5,0);fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(4)+.6,.08);fade(this.hand,t,P(5),.5);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 09 — Décodage (sauge) : l'accumulation devient le message.
+sc('accumulation',['09'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ac2-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('aa')+'<g class="aa-boil">'+
+    TXT('',1180,250,34,'lui','var(--second)')+TXT('',1600,250,34,'elle','var(--second)')+'<line x1="1390" y1="230" x2="1390" y2="860" style="stroke:var(--rule);stroke-width:3"/></g></svg>'+
+    msg('aa-a',1060,320,240,'Bonjour…',{size:26})+
+    msg('aa-b0',1480,320,240,'Bonjour…',{size:24})+msg('aa-b1',1480,420,240,'Vous avez vu ?',{size:24})+msg('aa-b2',1480,520,240,'Pourquoi ?',{size:24})+
+    '<div class="aa-big" style="position:absolute;left:1470px;top:650px;width:300px;padding:20px;border-radius:22px;background:var(--accent);color:var(--night);text-align:center;font-family:Caveat,cursive;font-weight:600;font-size:62px;opacity:0">j’insiste</div></div>'+
+    pool(800,0,1100,1000,'aa-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:240px;width:600px"><p class="sub aa-sub">Lui pensait relancer une conversation.</p><h2 class="line aa-line" style="font-size:62px;color:var(--sage)">Ce n’est plus le contenu qui compte. C’est l’accumulation.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ac2-cam');this.boil=q('.aa-boil');this.a=q('.aa-a');this.b=[0,1,2].map(i=>q('.aa-b'+i));this.big=q('.aa-big');this.sub=q('.aa-sub');this.line=split(q('.aa-line'));this.pool=q('.aa-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,520);W.boil(this.boil,t);fade(this.a,t,P(0)+.3,.4,10);
+  this.b.forEach((b,i)=>fade(b,t,P(2)+i*.5,.4,10));fade(this.big,t,P(4),.6,20);fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.09);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 10 — Toutes les insistances d'avant.
+sc('avant',['10'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam av-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('av')+'<g class="av-boil">'+W.ground(930,900,1820,0)+
+    [0,1,2,3].map(i=>'<g class="av-g'+i+'" style="opacity:0">'+W.figure('',1700-i*110,926,.95-i*.08,true,'color-mix(in srgb,var(--main) '+(14-i*3)+'%,var(--ground))')+'</g>').join('')+
+    W.figure('av-m',1150,926,1.02,true)+W.woman('av-w',1000,926,1.05,false)+'</g></svg>'+note('av-n',1400,320,'tous ceux d’avant',G+';font-size:48px')+'</div>'+
+    pool(800,0,1100,1000,'av-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:560px"><p class="sub av-sub">Beaucoup de femmes ont déjà vécu cette mécanique.</p><h2 class="line av-line" style="font-size:60px;color:var(--sage)">Elles ne réagissent pas seulement à cet homme-là.</h2></div></div>';
+  const q=Q(r);this.cam=q('.av-cam');this.st=W.prep(r);this.boil=q('.av-boil');this.g=[0,1,2,3].map(i=>q('.av-g'+i));this.m=q('.av-m');this.w=q('.av-w');this.n=q('.av-n');this.sub=q('.av-sub');this.line=split(q('.av-line'));this.pool=q('.av-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1300,620);W.draw(this.st,t);W.boil(this.boil,t);show(this.w,t,.2,.8);show(this.m,t,.5,.8);
+  this.g.forEach((g,i)=>show(g,t,P(2)+i*.45,.6));fade(this.n,t,P(2)+1.4,.5,0);fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.09);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 11 — Un seul message : on propose. Trois : on réclame.
+sc('un-seul',['11'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam un-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('un')+'<g class="un-boil">'+TXT('',1170,250,34,'un message','var(--sage)')+TXT('',1610,250,34,'trois messages','var(--second)')+'</g></svg>'+
+    msg('un-a',1020,300,320,'« Votre profil m’a plu. Si vous souhaitez faire connaissance, ce sera avec plaisir. »',{bg:'var(--sage)',size:25})+
+    msg('un-b0',1470,300,280,'Bonjour…',{size:24,bg:'var(--second)'})+msg('un-b1',1470,390,280,'Vous avez vu ?',{size:24,bg:'var(--second)'})+msg('un-b2',1470,480,280,'Pourquoi ?',{size:24,bg:'var(--second)'})+
+    note('un-n1',1100,620,'on propose',';color:var(--sage);font-size:56px')+note('un-n2',1520,620,'on réclame',';color:var(--accent);font-size:56px')+'</div>'+
+    pool(800,0,1100,1000,'un-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><h2 class="line un-line" style="font-size:66px">Un seul message peut valoir mieux que trois.</h2><p class="hand un-hand">Puis plus rien.</p></div></div>';
+  const q=Q(r);this.cam=q('.un-cam');this.boil=q('.un-boil');this.a=q('.un-a');this.b=[0,1,2].map(i=>q('.un-b'+i));this.n1=q('.un-n1');this.n2=q('.un-n2');this.line=split(q('.un-line'));this.hand=q('.un-hand');this.pool=q('.un-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,480);W.boil(this.boil,t);show(this.boil,t,.2,.5);fade(this.a,t,P(1),.5,10);
+  this.b.forEach((b,i)=>fade(b,t,P(0)+.6+i*.4,.4,10));fade(this.n1,t,P(4),.5,0);fade(this.n2,t,P(5),.5,0);wordsIn(this.line,t,P(0),.09);fade(this.hand,t,P(3),.5);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 12 — La fin : le premier pas, pas les deux. Entrelien.
+sc('fin',['12'],function(r){
+  const step=(x,y,c)=>'<ellipse cx="'+x+'" cy="'+y+'" rx="22" ry="11" style="fill:'+c+'"/>';
+  r.innerHTML='<div class="ground"><div class="cam fi-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('fi')+'<g class="fi-boil">'+W.ground(900,980,1820,0)+
+    W.figure('fi-m',1120,896,.9,false)+W.woman('fi-w',1700,896,.9,true)+'<g class="fi-s1">'+step(1230,900,'var(--accent)')+'</g><g class="fi-s2">'+step(1330,904,'none;stroke:var(--accent);stroke-width:3;stroke-dasharray:6 6')+step(1450,900,'none;stroke:var(--second);stroke-width:3;stroke-dasharray:6 6')+'</g></g></svg>'+
+    note('fi-n',1150,800,'le premier pas',';color:var(--accent);font-size:44px')+'</div>'+pool(1000,200,800,700,'fi-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:200px;width:820px"><p class="hand fi-a">Le silence aussi est une réponse.</p><h2 class="line fi-line" style="font-size:64px">L’un peut faire le premier pas… mais pas les deux.</h2></div>'+
+    '<div class="words" style="left:260px;bottom:140px;width:900px;gap:8px"><p class="line fi-name" style="font-size:124px;font-weight:500">Entrelien</p><p class="sub fi-tag">Les Carnets de l’Entremetteur</p></div></div>';
+  const q=Q(r);this.cam=q('.fi-cam');this.st=W.prep(r);this.boil=q('.fi-boil');this.m=q('.fi-m');this.w=q('.fi-w');this.s1=q('.fi-s1');this.s2=q('.fi-s2');this.n=q('.fi-n');this.a=q('.fi-a');this.line=split(q('.fi-line'));this.name=q('.fi-name');this.tag=q('.fi-tag');this.pool=q('.fi-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1.03,1,1400,620);W.draw(this.st,t);W.boil(this.boil,t);show(this.m,t,.2,.8);show(this.w,t,.4,.8);show(this.s1,t,P(2),.5);fade(this.n,t,P(2)+.3,.5,0);show(this.s2,t,P(3),.6);
+  fade(this.a,t,P(0),.6);wordsIn(this.line,t,P(2),.1);fade(this.name,t,P(4)+.2,.8,20);fade(this.tag,t,P(4)+.7,.6);this.pool.style.opacity=.75+.1*Math.sin(t)});
+
+startFilm();
+</script></body></html>

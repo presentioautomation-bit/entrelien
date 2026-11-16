@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"></head>
+<body><div id="stage"></div>
+<script src="file:///home/claude/prod/lib/engine.js"></script>
+<script src="timing.js"></script>
+<script>
+// Carnet n°6 — « On me dit que je fais dix ans de moins »
+// Fil rouge : trois âges — réel (65), ressenti (55), perçu (?, en ocre : il appartient à l'autre).
+const Q=r=>s=>r.querySelector(s);
+const G='color:var(--second)';
+const card=(cls,x,y,big,lab,col)=>'<g class="'+cls+'"><rect x="'+(x-110)+'" y="'+(y-120)+'" width="220" height="240" rx="16" style="fill:var(--paper2)"/><rect x="'+(x-110)+'" y="'+(y-120)+'" width="220" height="240" rx="16" style="fill:none;stroke:'+(col||'var(--main)')+';stroke-width:3.5"/>'+
+  TXT('',x,y+30,96,big,col||'var(--main)','middle','Fraunces,Georgia,serif')+TXT('',x,y+90,28,lab,'var(--second)')+'</g>';
+const thought=(cls,x,y,txt,col)=>'<g class="'+cls+'"><ellipse cx="'+x+'" cy="'+y+'" rx="110" ry="70" style="fill:var(--paper2)"/><ellipse class="ink-thin" cx="'+x+'" cy="'+y+'" rx="110" ry="70"/>'+TXT('',x,y+22,64,txt,col||'var(--main)','middle','Fraunces,Georgia,serif')+'<circle class="ink-thin" cx="'+x+'" cy="'+(y+100)+'" r="12"/></g>';
+
+// 01 — Accroche, nuit : « Je fais dix ans de moins. »
+sc('accroche',['01'],function(r){
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam ac-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="ac-boil">'+W.moon('ac-moon',1760,190,50)+
+    '<path class="pencil" d="M1000 930 Q1400 918 1880 930"/>'+W.woman('ac-w',1360,926,1.12,false,'var(--nightlift)')+'</g></svg>'+
+    '<p class="note ac-n" style="left:1500px;top:330px;font-size:110px;color:var(--accent)">− 10 ans</p></div>'+pool(1100,180,700,760,'ac-pool')+
+    '<div class="words on-night" style="left:160px;top:260px;width:860px"><h1 class="line ac-q" style="font-size:72px">« Je fais facilement dix ans de moins. »</h1><p class="sub ac-sub">Et quand je demande comment on le sait… la réponse est presque toujours la même.</p></div></div>';
+  const q=Q(r);this.cam=q('.ac-cam');this.boil=q('.ac-boil');this.w=q('.ac-w');this.moon=q('.ac-moon');this.n=q('.ac-n');this.qq=split(q('.ac-q'));this.sub=q('.ac-sub');this.pool=q('.ac-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.05,1380,600);W.boil(this.boil,t);show(this.w,t,.1,.8);show(this.moon,t,.4,1.2);fade(this.n,t,P(0)+1,.5,0);
+  wordsIn(this.qq,t,P(0),.1);fade(this.sub,t,P(2),.7);this.pool.style.opacity=(.3+.05*Math.sin(t*1.2))*eo(seg(t,.4,1.6))},{night:true});
+
+// 02 — Titre : les trois âges.
+sc('titre',['02'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ti-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ti')+'<g class="ti-boil">'+card('ti-c0',1160,520,'65','réel')+card('ti-c1',1420,520,'55','ressenti','var(--sage)')+card('ti-c2',1680,520,'?','perçu','var(--accent)')+'</g></svg></div>'+
+    pool(900,100,1100,900,'ti-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:320px;width:700px"><p class="hand ti-num">Carnet n°6</p><h1 class="line ti-line" style="font-size:76px">On me dit que je fais dix ans de moins</h1></div></div>';
+  const q=Q(r);this.cam=q('.ti-cam');this.boil=q('.ti-boil');this.c=[0,1,2].map(i=>q('.ti-c'+i));this.num=q('.ti-num');this.line=split(q('.ti-line'));this.pool=q('.ti-pool');
+},function(t){push(this.cam,t,this.dur,1,1.035,1420,540);W.boil(this.boil,t);this.c.forEach((c,i)=>show(c,t,.3+i*.6,.5));fade(this.num,t,this.P(0),.5);wordsIn(this.line,t,this.P(0)+1,.1);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 03 — Elles sont dynamiques, élégantes… dix ans, parfois quinze.
+sc('portrait',['03'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam po-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('po')+'<g class="po-boil">'+W.ground(930,980,1800,0)+W.woman('po-w',1300,926,1.08,false)+
+    W.suitcase('po-s',1620,920,.75)+'<g class="po-sp"><circle class="ink-thin" cx="1660" cy="520" r="40"/><path class="ink-thin" d="M1625 500 Q1660 530 1695 500 M1625 540 Q1660 510 1695 540"/></g></g></svg>'+
+    note('po-n',1450,300,'10 ans… parfois 15',';color:var(--accent);font-size:58px')+note('po-n2',1010,430,'élégantes, dynamiques',G+';font-size:42px')+'</div>'+
+    pool(800,0,1100,1000,'po-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:560px"><p class="sub po-sub">Elles ont souvent plus de soixante ans.</p><h2 class="line po-line" style="font-size:62px">D’où vient ce chiffre ? Elles me répondent :</h2></div></div>';
+  const q=Q(r);this.cam=q('.po-cam');this.st=W.prep(r);this.boil=q('.po-boil');this.w=q('.po-w');this.s=q('.po-s');this.sp=q('.po-sp');this.n=q('.po-n');this.n2=q('.po-n2');this.sub=q('.po-sub');this.line=split(q('.po-line'));this.pool=q('.po-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.w,t,.2,.8);show(this.s,t,P(1)+.8,.5);show(this.sp,t,P(1)+2,.5);fade(this.n2,t,P(1),.5,0);fade(this.n,t,P(2)+1.4,.5,0);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(2),.09);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 04 — La bascule, nuit : « Tout le monde me le dit. »
+sc('tout-le-monde',['04'],function(r){
+  const bubs=[[1060,250],[1500,210],[1560,430],[1000,520],[1560,680]];
+  r.innerHTML='<div class="ground"><div class="night"></div><div class="cam tm-cam"><svg class="art night-art" viewBox="0 0 1920 1080"><g class="tm-boil"><path class="pencil" d="M1000 930 Q1400 918 1880 930"/>'+W.woman('tm-w',1360,926,1.05,false,'var(--nightlift)')+'</g></svg>'+
+    bubs.map((b,i)=>'<div class="tm-b'+i+'" style="position:absolute;left:'+b[0]+'px;top:'+b[1]+'px;padding:10px 18px;border-radius:18px;background:var(--ground);font-family:Caveat,cursive;font-weight:600;font-size:36px;color:var(--main);opacity:0">'+['tu fais tellement jeune !','dix ans de moins','jamais je t’aurais donné ton âge','quinze, même !','tu n’as pas changé'][i]+'</div>').join('')+'</div>'+
+    pool(1100,180,700,760,'tm-pool')+'<div class="words on-night" style="left:160px;top:330px;width:820px"><h2 class="line tm-line" style="font-size:84px">« Tout le monde me le dit. »</h2></div></div>';
+  const q=Q(r);this.cam=q('.tm-cam');this.boil=q('.tm-boil');this.w=q('.tm-w');this.b=[0,1,2,3,4].map(i=>q('.tm-b'+i));this.line=split(q('.tm-line'));this.pool=q('.tm-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.06,1360,600);W.boil(this.boil,t);show(this.w,t,.1,.8);this.b.forEach((b,i)=>fade(b,t,.3+i*.25,.4,10));
+  wordsIn(this.line,t,P(0),.12);this.pool.style.opacity=(.2+.45*eo(seg(t,P(0),P(0)+1)))*(.92+.08*Math.sin(t*1.3))},{night:true,lead:1.5});
+
+// 05 — L'âge subjectif (sauge) : dans sa tête, 55.
+sc('subjectif',['05'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam su-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('su')+'<g class="su-boil">'+
+    '<path class="ink" d="M1300 860 Q1250 760 1260 680 Q1180 660 1200 600 L1240 560 Q1200 380 1360 300 Q1520 240 1620 360 Q1700 460 1650 600 Q1620 680 1640 860"/>'+
+    TXT('su-n',1440,560,150,'55','var(--sage)','middle','Fraunces,Georgia,serif')+'</g></svg>'+note('su-l',1340,620,'âge subjectif',';color:var(--sage);font-size:46px')+'</div>'+
+    pool(800,0,1100,1000,'su-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="sub su-sub">Se sentir plus jeune que son âge est très courant.</p><h2 class="line su-line" style="font-size:64px;color:var(--sage)">Dans sa tête, on n’a pas 65 ans. Et c’est sincère.</h2></div></div>';
+  const q=Q(r);this.cam=q('.su-cam');this.boil=q('.su-boil');this.n=q('.su-n');this.l=q('.su-l');this.sub=q('.su-sub');this.line=split(q('.su-line'));this.pool=q('.su-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1440,560);W.boil(this.boil,t);show(this.boil,t,.2,.8);show(this.n,t,P(2),.5);fade(this.l,t,P(1)+1,.5,0);
+  fade(this.sub,t,P(1),.6);wordsIn(this.line,t,P(2),.09);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 06 — « Tout le monde »… c'est qui ? Les proches, et l'inconnu.
+sc('qui',['06'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam qu-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('qu')+'<g class="qu-boil">'+W.ground(930,920,1840,0)+
+    W.woman('qu-w',1240,926,1,false)+'<g class="qu-f">'+W.figure('',1060,926,.7,false,'var(--wash)')+W.woman('',1130,926,.62,false,'var(--wash)')+W.figure('',1370,926,.66,true,'var(--wash)')+'</g>'+
+    '<ellipse class="qu-c" cx="1220" cy="760" rx="260" ry="230" style="fill:none;stroke:var(--sage);stroke-width:4;stroke-dasharray:14 12"/>'+W.figure('qu-m',1700,926,1,true,'var(--wash2)')+'</g></svg>'+
+    note('qu-n1',1050,420,'ceux qui nous aiment',';color:var(--sage);font-size:42px')+'<p class="note qu-q" style="left:1665px;top:420px;font-size:110px;color:var(--accent)">?</p></div>'+
+    pool(800,0,1100,1000,'qu-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:240px;width:600px"><p class="hand qu-h">Tout le monde… c’est qui ?</p><h2 class="line qu-line" style="font-size:58px">Comment me verra un homme qui ne me connaît pas ?</h2></div></div>';
+  const q=Q(r);this.cam=q('.qu-cam');this.st=W.prep(r);this.boil=q('.qu-boil');this.w=q('.qu-w');this.f=q('.qu-f');this.c=q('.qu-c');this.m=q('.qu-m');this.n1=q('.qu-n1');this.qm=q('.qu-q');this.h=q('.qu-h');this.line=split(q('.qu-line'));this.pool=q('.qu-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,640);W.draw(this.st,t);W.boil(this.boil,t);show(this.w,t,.2,.8);show(this.f,t,P(3),.6);show(this.c,t,P(5),.6);fade(this.n1,t,P(5)+.3,.5,0);
+  show(this.m,t,P(6),.6);fade(this.qm,t,P(6)+.8,.5,0);fade(this.h,t,P(1),.6);wordsIn(this.line,t,P(6),.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 07 — Ce que nous connaissons de nous / ce que l'autre voit.
+sc('present',['07'],function(r){
+  const col=(x,head,items,c)=>'<rect x="'+x+'" y="250" width="380" height="440" rx="16" style="fill:var(--paper2)"/><rect class="ink-thin" x="'+x+'" y="250" width="380" height="440" rx="16"/>'+TXT('',x+190,310,32,head,c)+items.map((s,i)=>TXT('pr-'+(x>1300?'b':'a')+i,x+190,400+i*80,40,s,'var(--main)')).join('');
+  r.innerHTML='<div class="ground"><div class="cam pr-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('pr')+'<g class="pr-boil">'+col(1000,'ce que je connais',['mon énergie','mon humour','mes projets','mon histoire'],'var(--sage)')+col(1440,'ce que l’autre voit',['un visage','une silhouette','une voix'],'var(--accent)')+'</g></svg></div>'+
+    pool(800,0,1100,1000,'pr-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="sub pr-sub">Nous, nous connaissons notre histoire.</p><h2 class="line pr-line" style="font-size:62px">L’autre ne voit d’abord que notre présent.</h2></div></div>';
+  const q=Q(r);this.cam=q('.pr-cam');this.boil=q('.pr-boil');this.a=[0,1,2,3].map(i=>q('.pr-a'+i));this.b=[0,1,2].map(i=>q('.pr-b'+i));this.sub=q('.pr-sub');this.line=split(q('.pr-line'));this.pool=q('.pr-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1400,480);W.boil(this.boil,t);show(this.boil,t,.1,.6);this.a.forEach((a,i)=>show(a,t,P(1)+i*.7,.4));this.b.forEach((b,i)=>show(b,t,P(2)+1.5+i*.8,.4));
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(2),.09);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 08 — « Je fais 55 ans, donc je cherche 55 ans. » Lui va simplement la regarder.
+sc('filtre',['08'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam fi2-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('fl')+'<g class="fl-boil">'+W.ground(930,980,1820,0)+W.woman('fl-w',1180,926,1,false)+W.figure('fl-m',1640,926,1.02,true)+
+    '<g class="fl-card"><rect x="980" y="230" width="440" height="140" rx="14" style="fill:var(--paper2)"/><rect class="ink-thin" x="980" y="230" width="440" height="140" rx="14"/>'+TXT('',1200,285,30,'je recherche','var(--second)')+TXT('',1200,340,34,'un homme de 55 ans','var(--main)')+'</g>'+
+    thought('fl-t',1640,420,'?','var(--accent)')+'</g></svg>'+note('fl-n',1560,780,'il va la regarder',G+';font-size:42px')+'</div>'+
+    pool(800,0,1100,1000,'fl-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub fl-sub">« Je fais cinquante-cinq ans… donc je cherche un homme de cinquante-cinq ans. »</p><h2 class="line fl-line" style="font-size:58px">Mais cet homme n’a aucune raison de partager cette perception.</h2></div></div>';
+  const q=Q(r);this.cam=q('.fi2-cam');this.st=W.prep(r);this.boil=q('.fl-boil');this.w=q('.fl-w');this.m=q('.fl-m');this.card=q('.fl-card');this.t=q('.fl-t');this.n=q('.fl-n');this.sub=q('.fl-sub');this.line=split(q('.fl-line'));this.pool=q('.fl-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.w,t,.2,.8);fade(this.card,t,P(1),.5,10);show(this.m,t,P(4)-.4,.7);show(this.t,t,P(4)+1,.5);fade(this.n,t,P(5),.5,0);
+  fade(this.sub,t,P(1),.6);wordsIn(this.line,t,P(4),.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 09 — Magnifique… et 65 ans. Les deux à la fois.
+sc('deux',['09'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam dx-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('dx')+'<g class="dx-boil">'+W.ground(930,980,1820,0)+W.woman('dx-w',1180,926,1,false)+W.figure('dx-m',1640,926,1.02,true)+
+    W.heart('dx-h',1560,380,.9)+'<g class="dx-65">'+TXT('',1730,410,80,'65','var(--main)','middle','Fraunces,Georgia,serif')+'</g></g></svg>'+note('dx-n',1520,470,'et',G+';font-size:50px')+note('dx-n2',1440,170,'les deux à la fois',';color:var(--sage);font-size:48px')+'</div>'+
+    pool(800,0,1100,1000,'dx-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:250px;width:600px"><p class="sub dx-sub">Il peut la trouver magnifique.</p><h2 class="line dx-line" style="font-size:60px">Et penser malgré tout qu’elle a soixante-cinq ans.</h2><p class="hand dx-hand" style="color:var(--second)">Et beaucoup d’hommes aussi sont sûrs de « faire jeune ».</p></div></div>';
+  const q=Q(r);this.cam=q('.dx-cam');this.st=W.prep(r);this.boil=q('.dx-boil');this.w=q('.dx-w');this.m=q('.dx-m');this.h=q('.dx-h');this.n65=q('.dx-65');this.n=q('.dx-n');this.n2=q('.dx-n2');this.sub=q('.dx-sub');this.line=split(q('.dx-line'));this.hand=q('.dx-hand');this.pool=q('.dx-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,600);W.draw(this.st,t);W.boil(this.boil,t);show(this.w,t,.1,.6);show(this.m,t,.2,.6);show(this.h,t,P(0)+.5,.5);fade(this.n,t,P(1),.3,0);show(this.n65,t,P(1)+.6,.5);fade(this.n2,t,P(2),.5,0);
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(1),.08);fade(this.hand,t,P(3),.6);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 10 — Décodage (sauge) : deux images qui se rencontrent.
+sc('images',['10'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam ig-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('ig')+'<g class="ig-boil">'+
+    '<circle class="ig-a" cx="1260" cy="540" r="230" style="fill:color-mix(in srgb,var(--sage) 18%,transparent);stroke:var(--sage);stroke-width:4"/><circle class="ig-b" cx="1560" cy="540" r="230" style="fill:color-mix(in srgb,var(--accent) 16%,transparent);stroke:var(--accent);stroke-width:4"/>'+
+    TXT('ig-ta',1170,550,32,'son image','var(--sage)')+TXT('ig-tb',1660,550,28,'l’image de l’autre','var(--accent)')+TXT('ig-tc',1410,830,34,'la rencontre','var(--main)')+'<path class="ig-tc ink-thin" d="M1410 790 V600"/>'+'</g></svg></div>'+
+    pool(800,0,1100,1000,'ig-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:240px;width:600px"><p class="sub ig-sub">Le problème n’est pas de chercher plus jeune.</p><h2 class="line ig-line" style="font-size:58px;color:var(--sage)">Une rencontre se fait avec l’image que deux personnes construisent l’une de l’autre.</h2></div></div>';
+  const q=Q(r);this.cam=q('.ig-cam');this.boil=q('.ig-boil');this.a=q('.ig-a');this.b=q('.ig-b');this.ta=q('.ig-ta');this.tb=q('.ig-tb');this.tc=q('.ig-tc');this.sub=q('.ig-sub');this.line=split(q('.ig-line'));this.pool=q('.ig-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.035,1410,540);W.boil(this.boil,t);show(this.a,t,P(0)+.5,.6);show(this.ta,t,P(0)+.8,.5);show(this.b,t,P(1),.6);show(this.tb,t,P(1)+.3,.5);r=this.root;r.querySelectorAll('.ig-tc').forEach(e=>show(e,t,P(3),.5));
+  fade(this.sub,t,P(0),.6);wordsIn(this.line,t,P(2),.07);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 11 — Élargir le regard : un homme de 70 ans… et la surprise.
+sc('elargir',['11'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam el-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('el')+'<g class="el-boil">'+W.ground(930,980,1820,0)+W.woman('el-w',1200,926,1,false)+W.figure('el-m',1600,926,1.04,true)+W.heart('el-h',1400,420,.8)+
+    '<rect class="el-f" x="1080" y="300" width="300" height="660" rx="10" style="fill:none;stroke:var(--second);stroke-width:3;stroke-dasharray:14 10"/></g></svg>'+note('el-n',1640,330,'70 ans',';color:var(--main);font-size:64px')+'</div>'+
+    pool(800,0,1100,1000,'el-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:230px;top:260px;width:600px"><p class="hand el-h2">Peut-être faut-il simplement élargir le regard.</p><h2 class="line el-line" style="font-size:58px">Et découvrir qu’il est bien plus vivant, plus élégant, qu’on ne l’imaginait.</h2></div></div>';
+  const q=Q(r);this.cam=q('.el-cam');this.st=W.prep(r);this.boil=q('.el-boil');this.w=q('.el-w');this.m=q('.el-m');this.h=q('.el-h');this.f=q('.el-f');this.n=q('.el-n');this.h2=q('.el-h2');this.line=split(q('.el-line'));this.pool=q('.el-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1,1.04,1400,620);W.draw(this.st,t);W.boil(this.boil,t);show(this.w,t,.1,.7);
+  const g=eo(seg(t,P(0)+.5,P(1)));this.f.setAttribute('width',(300+g*620).toFixed(0));this.f.style.opacity=1-.6*g;show(this.m,t,P(1),.7);fade(this.n,t,P(1)+.4,.5,0);show(this.h,t,P(2)+1,.5);
+  fade(this.h2,t,P(0),.6);wordsIn(this.line,t,P(2),.08);this.pool.style.opacity=.85+.1*Math.sin(t)});
+
+// 12 — La fin : trois âges ; le troisième appartient à l'autre. Entrelien.
+sc('fin',['12'],function(r){
+  r.innerHTML='<div class="ground"><div class="cam fn-cam"><svg class="art" viewBox="0 0 1920 1080">'+W.page('fn')+'<g class="fn-boil">'+card('fn-c0',1160,470,'65','réel')+card('fn-c1',1420,470,'55','ressenti','var(--sage)')+card('fn-c2',1680,470,'?','perçu','var(--accent)')+
+    W.figure('fn-m',1680,900,.5,true)+'</g></svg>'+note('fn-n',1590,620,'à l’autre',';color:var(--accent);font-size:46px')+'</div>'+
+    pool(1000,150,800,700,'fn-pool')+'<div class="edge"></div>'+
+    '<div class="words" style="left:260px;top:200px;width:760px"><p class="hand fn-a">Trois choses différentes.</p><h2 class="line fn-line" style="font-size:62px">La troisième ne nous appartient pas. Elle appartient à l’autre.</h2></div>'+
+    '<div class="words" style="left:260px;bottom:140px;width:900px;gap:8px"><p class="line fn-name" style="font-size:124px;font-weight:500">Entrelien</p><p class="sub fn-tag">Les Carnets de l’Entremetteur</p></div></div>';
+  const q=Q(r);this.cam=q('.fn-cam');this.boil=q('.fn-boil');this.c=[0,1,2].map(i=>q('.fn-c'+i));this.m=q('.fn-m');this.n=q('.fn-n');this.a=q('.fn-a');this.line=split(q('.fn-line'));this.name=q('.fn-name');this.tag=q('.fn-tag');this.pool=q('.fn-pool');
+},function(t){const P=this.P;push(this.cam,t,this.dur,1.03,1,1420,520);W.boil(this.boil,t);this.c.forEach((c,i)=>show(c,t,.3+i*1.2,.5));show(this.m,t,P(1),.6);fade(this.n,t,P(2),.5,0);
+  fade(this.a,t,P(0),.6);wordsIn(this.line,t,P(1),.08);fade(this.name,t,P(3)+.2,.8,20);fade(this.tag,t,P(3)+.7,.6);this.pool.style.opacity=.75+.1*Math.sin(t)});
+
+startFilm();
+</script></body></html>

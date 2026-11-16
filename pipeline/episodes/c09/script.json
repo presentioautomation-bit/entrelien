@@ -1,0 +1,20 @@
+{
+  "numero": "9",
+  "mood": "warm",
+  "hush": ["10"],
+  "gaps": {"01": 0.6, "10": 1.6},
+  "blocks": {
+    "01": "« J'ai très bien réussi ma vie professionnelle. Mais finalement, je suis seul comme un con. »… Il voulait une femme de son âge. Dix jours plus tard, je lui en ai présenté une… de vingt-cinq ans de moins.",
+    "02": "Carnet numéro neuf. Il avait tout réussi… sauf sa vie à deux.",
+    "03": "Il avait soixante-quatorze ans. Une belle carrière, une vie confortable, des voyages à n'en plus finir. Et pourtant, quand il m'a contacté, il ne m'a pas parlé de ses affaires. Il m'a parlé de sa solitude.",
+    "04": "Il m'a dit : « J'ai visité Venise des dizaines de fois. Mais jamais en amoureux. » Il voulait y retourner avec quelqu'un. Pas pour une réunion. Pas pour parler affaires. Simplement pour partager.",
+    "05": "Avec sa situation, il aurait pu choisir la facilité. Une femme beaucoup plus jeune. Une relation où l'argent aurait compté. Ce n'était pas ce qu'il voulait. Il voulait parler, rire, voyager… Et surtout, une relation sincère.",
+    "06": "Dix jours plus tard, une femme apparaît dans ma recherche. Elle a cinquante ans. Près de vingt-cinq ans de moins que lui. Et sa recherche est presque à l'inverse de ce qu'on imagine.",
+    "07": "Elle ne cherche pas un homme fortuné : elle a sa propre situation. Elle cherche un homme plus âgé. Pas de sorties tardives, pas la fête tous les week-ends. De la tranquillité, des voyages… et une passion qu'ils partagent déjà : le golf.",
+    "08": "Quand je lui parle d'elle, il doute. Il avait demandé une femme de son âge. J'organise quand même une première rencontre en visioconférence. Au début, il n'y croit pas vraiment. Puis ils commencent à parler… Je les laisse. Ils parlent pendant des heures.",
+    "09": "Vingt-quatre heures plus tard, je reçois deux messages.",
+    "10": "Elle : « Je suis toute bouleversée. » Lui : « Ça remue les tripes. »",
+    "11": "Leurs critères ne se ressemblaient pas. Leur manière de vivre, si. À force de dresser des listes, l'âge, la taille, le métier, aucun défaut, on finit par éliminer les gens avant même de les avoir rencontrés. Une recherche trop fermée nous protège de la mauvaise rencontre… mais aussi de la bonne.",
+    "12": "Combien de temps durera leur histoire ? Je n'en sais rien. Personne ne le sait. Mais il voulait une femme de son âge… et il a trouvé quelqu'un qui voulait vivre la même chose que lui. C'était un Carnet de l'Entremetteur."
+  }
+}
