@@ -1,22 +1,27 @@
 {
-  "numero": "8",
-  "titre": "Vous n'avez pas répondu. Alors j'ai insisté.",
-  "source": "https://entrelien.fr/carnets/vous-n-avez-pas-repondu-alors-j-ai-insiste",
-  "mood": "dusk",
-  "hush": ["06"],
-  "gaps": {"01": 0.6, "06": 1.6},
-  "blocks": {
-    "01": "Il lui a écrit une fois. Pas de réponse. Une deuxième fois. Toujours rien. Après le troisième message… il a fait quelque chose que je n'avais pas vu venir.",
-    "02": "Carnet numéro huit. Vous n'avez pas répondu. Alors j'ai insisté.",
-    "03": "J'ai discuté avec un homme plutôt réservé, assez timide. Mais je sentais qu'il avait vraiment envie de rencontrer quelqu'un. Un jour, une femme apparaît sur l'application. Elle lui plaît. Il lui écrit.",
-    "04": "Premier message : quelques mots pour se présenter. Pas de réponse. Il attend. Deuxième message : « Vous avez bien reçu le premier ? » Toujours rien.",
-    "05": "Troisième message : « Pourquoi vous ne répondez pas ? » Et comme le silence continuait…",
-    "06": "il a signalé son profil.",
-    "07": "Je l'ai appelé. Sa logique était parfaitement claire : « Je lui ai écrit trois fois. Elle ne répond pas. Ce n'est pas normal. » Pour lui, c'était une question de respect.",
-    "08": "Il avait tout envisagé. Elle n'avait pas vu le message. Un problème de compte. Un oubli. Alors je lui ai demandé : « Et si elle n'était tout simplement pas intéressée ? »… Il ne comprenait pas.",
-    "09": "Lui pensait relancer une conversation. Mais de l'autre côté, ce n'est plus le contenu des messages qui compte. C'est leur accumulation. Trois messages sans réponse deviennent un message à part entière. Et ce message dit : j'insiste.",
-    "10": "Beaucoup de femmes ont déjà vécu cette mécanique. Alors elles ne réagissent pas seulement à cet homme-là… mais à tous ceux qui ont insisté avant lui.",
-    "11": "Un seul message peut valoir mieux que trois. « Votre profil m'a plu. Si vous souhaitez faire connaissance, ce sera avec plaisir. » Puis plus rien. Dans un cas, on propose. Dans l'autre, on réclame une réponse.",
-    "12": "Le silence aussi est une réponse. Une rencontre n'est pas une dette. L'un peut faire le premier pas… mais pas les deux. C'était un Carnet de l'Entremetteur."
-  }
+ "numero": "8",
+ "titre": "Vous n'avez pas répondu. Alors j'ai insisté.",
+ "source": "https://entrelien.fr/carnets/vous-n-avez-pas-repondu-alors-j-ai-insiste",
+ "mood": "dusk",
+ "hush": [
+  "06"
+ ],
+ "gaps": {
+  "01": 0.6,
+  "06": 1.6
+ },
+ "blocks": {
+  "01": "Un homme est venu me raconter ce qui lui était arrivé sur une application de rencontre. Il avait écrit trois fois à une femme. Sans réponse. Et ce qu'il avait fait ensuite… je ne l'avais pas vu venir.",
+  "02": "Carnet numéro huit. Vous n'avez pas répondu. Alors j'ai insisté.",
+  "03": "C'est un homme plutôt réservé, assez timide. Mais on sent qu'il a vraiment envie de rencontrer quelqu'un. Il me raconte qu'un jour, sur une application, le profil d'une femme lui a plu. Il lui a écrit.",
+  "04": "D'abord quelques mots pour se présenter. Pas de réponse. Il a attendu. Puis il lui a demandé si elle avait bien reçu son premier message. Toujours rien.",
+  "05": "Il a écrit une troisième fois, pour lui demander pourquoi elle ne répondait pas. Et comme le silence continuait…",
+  "06": "Il a signalé son profil.",
+  "07": "Puis il m'a demandé mon avis. Pour lui, tout était clair : « Je lui ai écrit trois fois. Elle ne répond pas. Ce n'est pas normal. » C'était une question de respect.",
+  "08": "Il avait tout envisagé. Elle n'avait pas vu le message. Un problème de compte. Un oubli. Alors je lui ai demandé : « Et si elle n'était tout simplement pas intéressée ? »… Il ne comprenait pas.",
+  "09": "Lui pensait relancer une conversation. Mais de l'autre côté, ce n'est plus le contenu des messages qui compte. C'est leur accumulation. Trois messages sans réponse deviennent un message à part entière. Et ce message dit : j'insiste.",
+  "10": "Beaucoup de femmes ont déjà vécu cette mécanique. Alors elles ne réagissent pas seulement à cet homme-là… mais à tous ceux qui ont insisté avant lui.",
+  "11": "Un seul message peut valoir mieux que trois. « Votre profil m'a plu. Si vous souhaitez faire connaissance, ce sera avec plaisir. » Puis plus rien. Dans un cas, on propose. Dans l'autre, on réclame une réponse.",
+  "12": "Le silence aussi est une réponse. Une rencontre n'est pas une dette. L'un peut faire le premier pas… mais pas les deux. C'était un Carnet de l'Entremetteur."
+ }
 }
